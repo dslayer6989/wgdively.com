@@ -1,0 +1,27 @@
+<div class="tool-panel">
+  <p class="label">Aspect ratio of a resolution</p>
+  <div class="field-row">
+    <div class="field"><label for="rs-w">Width</label><input id="rs-w" type="number" min="1" value="3840"></div>
+    <div class="field"><label for="rs-h">Height</label><input id="rs-h" type="number" min="1" value="1600"></div>
+  </div>
+  <dl class="kv" id="rs-out"></dl>
+</div>
+<div class="tool-panel">
+  <p class="label">Resize at the same aspect ratio</p>
+  <div class="field-row">
+    <div class="field"><label for="rz-r">Aspect ratio</label><select id="rz-r"><option value="16:9">16:9 (TV, YouTube)</option><option value="4:3">4:3 (old TV)</option><option value="21:9">21:9 (ultrawide)</option><option value="2.39:1">2.39:1 (cinema scope)</option><option value="1.85:1">1.85:1 (flat cinema)</option><option value="9:16">9:16 (vertical / Shorts)</option><option value="1:1">1:1 (square)</option><option value="custom">From above</option></select></div>
+    <div class="field"><label for="rz-w">New width</label><input id="rz-w" type="number" min="1" value="1920"></div>
+    <div class="field"><label for="rz-h">New height</label><input id="rz-h" type="number" min="1" value="1080"></div>
+  </div>
+  <p class="hint">Change either width or height and the other updates. Video encoders like even numbers, so both are rounded to even values.</p>
+</div>
+<div class="tool-panel">
+  <p class="label">Screen pixel density</p>
+  <div class="field-row">
+    <div class="field"><label for="pd-w">Width (px)</label><input id="pd-w" type="number" value="3840"></div>
+    <div class="field"><label for="pd-h">Height (px)</label><input id="pd-h" type="number" value="2160"></div>
+    <div class="field"><label for="pd-d">Diagonal (inches)</label><input id="pd-d" type="number" step="0.1" value="65"></div>
+  </div>
+  <dl class="kv" id="pd-out"></dl>
+</div>
+<div class="tool-panel"><p class="label">Common resolutions</p><div class="table-wrap" style="margin:0"><table><thead><tr><th>Name</th><th>Size</th><th>Ratio</th><th>Megapixels</th></tr></thead><tbody id="rs-table"></tbody></table></div></div>

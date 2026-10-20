@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guides: homelab, home server and streaming how-tos · wgdively, inc.</title>
+<meta name="description" content="Step-by-step guides for building a home server, self-hosting with Docker, keeping Ubuntu healthy and installing apps on smart TVs, written in plain English.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0e0e0d">
+<meta property="og:title" content="Guides: homelab, home server and streaming how-tos · wgdively, inc.">
+<meta property="og:description" content="Step-by-step guides for building a home server, self-hosting with Docker, keeping Ubuntu healthy and installing apps on smart TVs, written in plain English.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/doto.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t);if(sessionStorage.getItem('entered'))d.classList.add('entered');}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/assets/css/site.css?v=202610201521">
+</head>
+<body class="page-guides">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="rail" aria-hidden="true">
+  <svg class="spinner" viewBox="0 0 200 200">
+    <defs><path id="ring-path" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+    <g class="spinner-text"><text><textPath href="#ring-path">IT · STREAMING · SECURITY · HOMELAB · TOOLS · GUIDES · </textPath></text></g>
+    <circle class="spinner-track" cx="100" cy="100" r="62"/>
+    <circle class="spinner-progress" cx="100" cy="100" r="62" pathLength="100"/>
+    <text class="spinner-num" x="100" y="108" text-anchor="middle">01</text>
+  </svg>
+  <p class="rail-label">Top</p>
+</div>
+<div class="site">
+<header class="site-header">
+  <div class="bar wrap">
+    <a class="logo" href="/" aria-label="wgdively, inc. home">wgdively<span class="logo-comma">,</span> inc.</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-icon" aria-hidden="true"></span><span>Menu</span></button>
+    <div class="menu" id="menu">
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="/downloads/"><span>Downloads</span><span class="num">01</span></a></li>
+          <li><a href="/projects/"><span>Projects</span><span class="num">02</span></a></li>
+          <li><a href="/tools/"><span>Tools</span><span class="num">03</span></a></li>
+          <li><a href="/guides/" aria-current="page"><span>Guides</span><span class="num">04</span></a></li>
+          <li><a href="/contact/"><span>Contact</span><span class="num">05</span></a></li>
+        </ul>
+      </nav>
+      <div class="theme-switch" role="group" aria-label="Color theme">
+        <button type="button" data-theme-set="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+        <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      </div>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="wrap">
+  <header class="page-head" data-section="Guides">
+    <p class="eyebrow">04 · Guides</p>
+    <h1>Guides.</h1>
+    <p class="lede">Long-form, step-by-step write-ups in plain English. Every command is shown in full, and every step says what a good result looks like.</p>
+  </header>
+
+  <section class="section reveal" data-section="Featured">
+    <div class="section-head"><h2>The big one</h2><span class="section-num">In progress</span></div>
+    <article class="card" style="max-width:46rem">
+      <span class="meta">Coming soon · Ubuntu 26.04 · Docker · Cloudflare Tunnel</span>
+      <h3>From bare mini PC to home server</h3>
+      <p>How the server behind this site was built: installing Ubuntu on a Beelink mini PC, locking it down, Docker, reaching it safely from anywhere with a Cloudflare Tunnel (no open router ports), self-hosted apps, and publishing a website from GitHub automatically.</p>
+      <p class="small">It's being tidied up and checked line by line before it goes up. Personal details are coming out, and every command is being re-tested.</p>
+      <span class="go muted">Not published yet</span>
+    </article>
+  </section>
+
+  <section class="section reveal" data-section="How-tos">
+    <div class="section-head"><h2>Step-by-step help on this site</h2><span class="section-num">Available now</span></div>
+    <div class="grid wide">
+      <a class="card" href="/projects/sideloading/"><span class="meta">Fire TV · Android TV · Samsung · LG</span><h3>Install apps on your TV</h3><p>Turn on developer options and sideload apps, with steps for each kind of TV.</p><span class="go">Read →</span></a>
+      <a class="card" href="/projects/homelab-kits/"><span class="meta">Docker · Ubuntu</span><h3>Start a homelab with Docker</h3><p>Install Docker, then build and run a kit of self-hosted services, with setup steps written for exactly what you picked.</p><span class="go">Read →</span></a>
+      <a class="card" href="/projects/server-scripts/"><span class="meta">Ubuntu · Bash · cron</span><h3>Keep a home server healthy</h3><p>Health checks, safe updates, clean-ups and backups, plus how to schedule them.</p><span class="go">Read →</span></a>
+      <a class="card" href="/projects/windows-toolkit/"><span class="meta">Windows 10 · 11</span><h3>Set up a new Windows PC fast</h3><p>One script installs your apps with winget and sets the settings you like.</p><span class="go">Read →</span></a>
+      <a class="card" href="/tools/nuvio-picker/"><span class="meta">Nuvio</span><h3>Which Nuvio do I need?</h3><p>Answer a question or two and get the right file and install steps for your device.</p><span class="go">Read →</span></a>
+    </div>
+  </section>
+
+  <section class="section reveal" data-section="Ask">
+    <div class="callout"><p><strong>Want a guide on something?</strong> <a href="/contact/">Send a request</a>. Popular requests get written first.</p></div>
+  </section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-logo">wgdively, inc.</p>
+      <p class="footer-tag">Streaming, scheming, and the occasional sudo.</p>
+      <p class="footer-joke">There's no place like 127.0.0.1!</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/downloads/">Downloads</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="footer-meta">
+      <button type="button" class="sound-toggle" aria-pressed="false">Ambient sound: off</button>
+      <p>© <span data-year>2026</span> wgdively, inc. Incorporated in spirit only.</p>
+      <p class="credits">Fonts: Doto, Instrument Sans, JetBrains Mono (SIL OFL). Passphrase words: EFF large wordlist (CC BY 3.0).</p>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="/assets/js/qrcode.js?v=202610201521" defer></script>
+<script src="/assets/js/site.js?v=202610201521" defer></script>
+
+</body>
+</html>

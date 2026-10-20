@@ -3,22 +3,136 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>wgdively.com</title>
-<meta name="description" content="A new site is on the way.">
-<style>
-:root { color-scheme: light dark; --bg: #f7f7f5; --fg: #1d1d1b; --muted: #5b5b57; }
-@media (prefers-color-scheme: dark) { :root { --bg: #161615; --fg: #ededea; --muted: #a3a39e; } }
-html, body { height: 100%; margin: 0; }
-body { display: grid; place-items: center; padding: 1rem; background: var(--bg); color: var(--fg); font: 1.125rem/1.5 system-ui, sans-serif; }
-main { text-align: center; }
-h1 { margin: 0 0 .5rem; font-size: clamp(2rem, 6vw, 3.5rem); letter-spacing: -0.02em; }
-p { margin: 0; color: var(--muted); }
-</style>
+<title>wgdively, inc. · IT, streaming and the occasional sudo</title>
+<meta name="description" content="A homelab-built IT hub: Nuvio downloads, free in-browser IT tools, homelab starter kits, Windows and server scripts, TV sideloading help and guides.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0e0e0d">
+<meta property="og:title" content="wgdively, inc. · IT, streaming and the occasional sudo">
+<meta property="og:description" content="A homelab-built IT hub: Nuvio downloads, free in-browser IT tools, homelab starter kits, Windows and server scripts, TV sideloading help and guides.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/doto.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t);if(sessionStorage.getItem('entered'))d.classList.add('entered');}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/assets/css/site.css?v=202610201521">
 </head>
-<body>
-<main>
-<h1>wgdively.com</h1>
-<p>A new site is on the way.</p>
+<body class="page-home">
+<a class="skip" href="#main">Skip to content</a>
+<div class="gate" role="dialog" aria-modal="true" aria-label="Welcome to wgdively, inc.">
+  <p class="gate-hint">Signal acquired</p>
+  <p class="gate-logo">wgdively, inc.</p>
+  <p class="gate-tag">Streaming, scheming, and the occasional sudo.</p>
+  <p class="gate-joke">There's no place like 127.0.0.1!</p>
+  <button class="gate-enter" type="button">[ press enter<span class="blink">_</span> ]</button>
+  <button class="gate-sound" type="button" aria-pressed="false">Ambient sound: off</button>
+</div>
+<div class="rail" aria-hidden="true">
+  <svg class="spinner" viewBox="0 0 200 200">
+    <defs><path id="ring-path" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+    <g class="spinner-text"><text><textPath href="#ring-path">IT · STREAMING · SECURITY · HOMELAB · TOOLS · GUIDES · </textPath></text></g>
+    <circle class="spinner-track" cx="100" cy="100" r="62"/>
+    <circle class="spinner-progress" cx="100" cy="100" r="62" pathLength="100"/>
+    <text class="spinner-num" x="100" y="108" text-anchor="middle">01</text>
+  </svg>
+  <p class="rail-label">Top</p>
+</div>
+<div class="site">
+<header class="site-header">
+  <div class="bar wrap">
+    <a class="logo" href="/" aria-label="wgdively, inc. home">wgdively<span class="logo-comma">,</span> inc.</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-icon" aria-hidden="true"></span><span>Menu</span></button>
+    <div class="menu" id="menu">
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="/downloads/"><span>Downloads</span><span class="num">01</span></a></li>
+          <li><a href="/projects/"><span>Projects</span><span class="num">02</span></a></li>
+          <li><a href="/tools/"><span>Tools</span><span class="num">03</span></a></li>
+          <li><a href="/guides/"><span>Guides</span><span class="num">04</span></a></li>
+          <li><a href="/contact/"><span>Contact</span><span class="num">05</span></a></li>
+        </ul>
+      </nav>
+      <div class="theme-switch" role="group" aria-label="Color theme">
+        <button type="button" data-theme-set="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+        <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      </div>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+<main id="main" tabindex="-1">
+<section class="hero wrap" data-section="Hello">
+  <p class="eyebrow">IT · Streaming · Security · Homelab</p>
+  <h1 class="hero-logo">wgdively<span class="logo-comma">,</span> inc.</h1>
+  <p class="tagline">Streaming, scheming, and the occasional sudo.</p>
+  <p class="tagline-joke">There's no place like 127.0.0.1!</p>
+  <div class="btn-row">
+    <a class="btn primary" href="/downloads/">Get Nuvio</a>
+    <a class="btn" href="/tools/">Open the toolbox</a>
+  </div>
+  <div class="hero-meta">
+    <span><span class="status-dot" aria-hidden="true"></span>Served from a homelab<strong>Beelink · Ubuntu 26.04</strong></span>
+    <span>Tools that run in your browser<strong>No sign-up, no tracking</strong></span>
+    <span>Latest Nuvio build<strong id="home-latest">Checking…</strong></span>
+  </div>
+</section>
+
+<section class="section wrap reveal" data-section="Index">
+  <div class="section-head"><h2>What's here</h2><span class="section-num">Index / 05</span></div>
+  <ul class="index-list">
+    <li><a href="/downloads/"><span class="n">01</span><span class="t">Downloads</span><span class="d">Nuvio for Android, Android TV, Fire TV, Windows, and Samsung and LG smart TVs. Every build, every file, with a QR code for your phone.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+    <li><a href="/projects/"><span class="n">02</span><span class="t">Projects</span><span class="d">Homelab starter kits, a Windows toolkit, a TV sideloading helper, playlist tools and server scripts, all ready to use.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+    <li><a href="/tools/"><span class="n">03</span><span class="t">Tools</span><span class="d">Over 25 utilities that run in your browser: IP and DNS lookups, subnet math, passwords, hashes, JSON, regex, cron, QR codes and more.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+    <li><a href="/guides/"><span class="n">04</span><span class="t">Guides</span><span class="d">Step-by-step write-ups, starting with how this server was built from a bare mini PC.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+    <li><a href="/contact/"><span class="n">05</span><span class="t">Contact</span><span class="d">Questions, bug reports, or work enquiries. Send a message and it lands in the right inbox.</span><span class="arrow" aria-hidden="true">→</span></a></li>
+  </ul>
+</section>
+
+<section class="section wrap reveal" data-section="Principles">
+  <div class="section-head"><h2>House rules</h2><span class="section-num">How it's run</span></div>
+  <div class="pillars">
+    <div class="pillar"><h3>Your data stays yours</h3><p>The tools run in your browser. Nothing you type is sent to this server. The few that need the internet, like DNS and IP lookups, say so.</p></div>
+    <div class="pillar"><h3>Accurate over clever</h3><p>Every command, port and setting here has been checked. If something's wrong, the contact form gets it fixed.</p></div>
+    <div class="pillar"><h3>Built in the open</h3><p>The site's source is public on GitHub, and every change goes through a reviewed pull request.</p></div>
+    <div class="pillar"><h3>Hack responsibly</h3><p>Security tools are for systems you own or have permission to test. Learn on the practice labs in the toolbox.</p></div>
+  </div>
+</section>
+<script>
+(function(){fetch('/data/releases.json',{cache:'no-cache'}).then(function(r){return r.json();}).then(function(d){var l=(d.repos&&d.repos.NuvioDesktop||[])[0];var el=document.getElementById('home-latest');if(el)el.textContent=l?(l.name||l.tag).replace(/^Nuvio\s*/,''):'See downloads';}).catch(function(){var el=document.getElementById('home-latest');if(el)el.textContent='See downloads';});})();
+</script>
 </main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-logo">wgdively, inc.</p>
+      <p class="footer-tag">Streaming, scheming, and the occasional sudo.</p>
+      <p class="footer-joke">There's no place like 127.0.0.1!</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/downloads/">Downloads</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="footer-meta">
+      <button type="button" class="sound-toggle" aria-pressed="false">Ambient sound: off</button>
+      <p>© <span data-year>2026</span> wgdively, inc. Incorporated in spirit only.</p>
+      <p class="credits">Fonts: Doto, Instrument Sans, JetBrains Mono (SIL OFL). Passphrase words: EFF large wordlist (CC BY 3.0).</p>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="/assets/js/qrcode.js?v=202610201521" defer></script>
+<script src="/assets/js/site.js?v=202610201521" defer></script>
+
 </body>
 </html>

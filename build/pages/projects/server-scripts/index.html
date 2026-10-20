@@ -1,0 +1,88 @@
+<!--meta {"title": "Ubuntu home server scripts: health report, safe updates, Docker clean-up, backups · wgdively, inc.", "description": "Small, readable and tested Bash scripts for an Ubuntu home server: a one-screen health report, logged updates, Docker disk clean-up and rotating folder backups.", "section": "projects"} -->
+<div class="wrap">
+  <header class="page-head" data-section="Server scripts">
+    <p class="eyebrow"><a href="/projects/" style="color:inherit">02 · Projects</a> / Server scripts</p>
+    <h1>Server scripts.</h1>
+    <p class="lede">Four small Bash scripts for an Ubuntu home server. They're short enough to read in a minute, and you should read them before you run them. Each one was checked with ShellCheck and tested on Ubuntu.</p>
+    <div class="callout"><p><strong>Getting a script onto your server:</strong> copy the download link, then on the server run <code>curl -fsSLO</code> followed by the link. Open it with <code>less</code> to read it, then run it with <code>bash</code>. Nothing here pipes straight from the internet into your shell.</p></div>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Scripts">
+    <button class="btn" role="tab" id="t-health" aria-controls="p-health" aria-selected="true">Health report</button>
+    <button class="btn" role="tab" id="t-update" aria-controls="p-update" aria-selected="false" tabindex="-1">Safe update</button>
+    <button class="btn" role="tab" id="t-docker" aria-controls="p-docker" aria-selected="false" tabindex="-1">Docker clean-up</button>
+    <button class="btn" role="tab" id="t-backup" aria-controls="p-backup" aria-selected="false" tabindex="-1">Backups</button>
+  </div>
+
+  <section class="tool-panel" role="tabpanel" id="p-health" aria-labelledby="t-health">
+    <div class="stat-row"><span class="tag ok">Read-only</span><span class="tag">No sudo needed</span></div>
+    <h2 style="margin-top:0">health-report.sh</h2>
+    <p>One screen telling you how the server is doing: uptime, memory, disk space (warns at 90%), temperature, waiting updates, failed services, Docker containers that are unhealthy or stopped, and whether the internet and DNS work.</p>
+    <pre><code>curl -fsSLO https://wgdively.com/scripts/health-report.sh
+bash health-report.sh</code></pre>
+    <div class="btn-row" style="margin-bottom:var(--space-4)"><a class="btn primary" href="/scripts/health-report.sh" download>Download</a><button class="btn" type="button" data-copy-target="#s-health" data-copy-label="Script copied">Copy script</button></div>
+    <details class="notes"><summary>Read the script</summary><pre class="script"><code id="s-health">{{include:scripts/health-report.sh}}</code></pre></details>
+  </section>
+
+  <section class="tool-panel" role="tabpanel" id="p-update" aria-labelledby="t-update" hidden>
+    <div class="stat-row"><span class="tag accent">Changes the system</span><span class="tag">Needs sudo</span></div>
+    <h2 style="margin-top:0">safe-update.sh</h2>
+    <p>Installs all Ubuntu updates without asking questions, keeps your existing config files if a package wants to replace one, tidies up old packages, and logs everything to <code>/var/log/safe-update.log</code>. Give it your compose folder and it updates those containers too. It tells you if a restart is needed, but never restarts by itself.</p>
+    <pre><code>curl -fsSLO https://wgdively.com/scripts/safe-update.sh
+sudo bash safe-update.sh              # packages only
+sudo bash safe-update.sh ~/homelab    # packages + containers</code></pre>
+    <div class="btn-row" style="margin-bottom:var(--space-4)"><a class="btn primary" href="/scripts/safe-update.sh" download>Download</a><button class="btn" type="button" data-copy-target="#s-update" data-copy-label="Script copied">Copy script</button></div>
+    <details class="notes"><summary>Read the script</summary><pre class="script"><code id="s-update">{{include:scripts/safe-update.sh}}</code></pre></details>
+  </section>
+
+  <section class="tool-panel" role="tabpanel" id="p-docker" aria-labelledby="t-docker" hidden>
+    <div class="stat-row"><span class="tag accent">Deletes unused items</span><span class="tag ok">Never touches volumes</span></div>
+    <h2 style="margin-top:0">docker-cleanup.sh</h2>
+    <p>Docker quietly fills disks with old images and build cache. This shows what it would remove and asks first. It removes stopped containers, unused networks, untagged images and build cache, and leaves your volumes (your data) and any image a container is using alone.</p>
+    <pre><code>curl -fsSLO https://wgdively.com/scripts/docker-cleanup.sh
+bash docker-cleanup.sh          # asks before deleting
+bash docker-cleanup.sh --yes    # no question (for a schedule)</code></pre>
+    <div class="btn-row" style="margin-bottom:var(--space-4)"><a class="btn primary" href="/scripts/docker-cleanup.sh" download>Download</a><button class="btn" type="button" data-copy-target="#s-docker" data-copy-label="Script copied">Copy script</button></div>
+    <details class="notes"><summary>Read the script</summary><pre class="script"><code id="s-docker">{{include:scripts/docker-cleanup.sh}}</code></pre></details>
+  </section>
+
+  <section class="tool-panel" role="tabpanel" id="p-backup" aria-labelledby="t-backup" hidden>
+    <div class="stat-row"><span class="tag">Writes backups</span><span class="tag">Keeps the newest N</span></div>
+    <h2 style="margin-top:0">backup-folder.sh</h2>
+    <p>Makes a dated <code>.tar.gz</code> of a folder (your homelab folder, say), checks the archive opens, and deletes the oldest backups so only the newest few remain. Point it at a USB drive or a second disk. A backup on the same disk won't save you if that disk dies.</p>
+    <pre><code>curl -fsSLO https://wgdively.com/scripts/backup-folder.sh
+bash backup-folder.sh ~/homelab /mnt/usb/backups 7</code></pre>
+    <p class="small muted">Databases (like Uptime Kuma's) are safest to back up while their container is stopped: <code>docker compose stop</code>, back up, then <code>docker compose start</code>.</p>
+    <div class="btn-row" style="margin-bottom:var(--space-4)"><a class="btn primary" href="/scripts/backup-folder.sh" download>Download</a><button class="btn" type="button" data-copy-target="#s-backup" data-copy-label="Script copied">Copy script</button></div>
+    <details class="notes"><summary>Read the script</summary><pre class="script"><code id="s-backup">{{include:scripts/backup-folder.sh}}</code></pre></details>
+  </section>
+
+  <section class="section reveal prose" data-section="Schedule">
+    <h2>Run them on a schedule</h2>
+    <p>Run <code>sudo crontab -e</code>, add lines like these, and save. The <a href="/tools/cron/">cron explainer</a> turns the times into plain English. Move the scripts somewhere permanent first, for example <code>sudo install -m 755 *.sh /usr/local/bin/</code>.</p>
+    <pre><code># Every Sunday at 4:00 — updates (packages + containers)
+0 4 * * 0  /usr/local/bin/safe-update.sh /home/YOU/homelab
+# Every day at 3:30 — back up the homelab folder, keep a week
+30 3 * * *  /usr/local/bin/backup-folder.sh /home/YOU/homelab /mnt/usb/backups 7 >> /var/log/backup.log 2>&1
+# First of the month at 5:00 — Docker clean-up
+0 5 1 * *  /usr/local/bin/docker-cleanup.sh --yes >> /var/log/docker-cleanup.log 2>&1</code></pre>
+  </section>
+</div>
+<script>
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function pick(t, focus) {
+    tabs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute('aria-controls')).hidden = !on; });
+    if (focus) t.focus();
+    history.replaceState(null, '', '#' + t.id.slice(2));
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { pick(t); });
+    t.addEventListener('keydown', function (e) {
+      var n = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (n) { e.preventDefault(); pick(tabs[(i + n + tabs.length) % tabs.length], true); }
+    });
+  });
+  var start = document.getElementById('t-' + location.hash.slice(1)); if (start) pick(start);
+})();
+</script>

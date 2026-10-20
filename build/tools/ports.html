@@ -1,0 +1,10 @@
+<div class="tool-panel">
+  <div class="filter-bar" style="margin-bottom:0">
+    <label class="visually-hidden" for="port-q">Search ports</label>
+    <input id="port-q" type="search" placeholder="Search a port number or service, like 443 or plex" autocomplete="off">
+    <div class="tags" id="port-cats" role="group" aria-label="Filter by category"></div>
+  </div>
+</div>
+<p class="small muted" id="port-count" aria-live="polite"></p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Port</th><th scope="col">Proto</th><th scope="col">Service</th><th scope="col">Notes</th></tr></thead><tbody id="port-body"></tbody></table></div>
+<div class="callout small"><p><strong>Safety tip:</strong> never forward management ports like SSH (22), RDP (3389), SMB (445) or databases straight to the internet from your router. Use a VPN like WireGuard or Tailscale, or a Cloudflare Tunnel with a login in front, instead. These are the usual defaults, and most can be changed in each app's settings.</p></div>

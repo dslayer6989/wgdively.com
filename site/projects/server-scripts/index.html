@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ubuntu home server scripts: health report, safe updates, Docker clean-up, backups · wgdively, inc.</title>
+<meta name="description" content="Small, readable and tested Bash scripts for an Ubuntu home server: a one-screen health report, logged updates, Docker disk clean-up and rotating folder backups.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0e0e0d">
+<meta property="og:title" content="Ubuntu home server scripts: health report, safe updates, Docker clean-up, backups · wgdively, inc.">
+<meta property="og:description" content="Small, readable and tested Bash scripts for an Ubuntu home server: a one-screen health report, logged updates, Docker disk clean-up and rotating folder backups.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/doto.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t);if(sessionStorage.getItem('entered'))d.classList.add('entered');}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/assets/css/site.css?v=202610201521">
+</head>
+<body class="page-projects">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="rail" aria-hidden="true">
+  <svg class="spinner" viewBox="0 0 200 200">
+    <defs><path id="ring-path" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+    <g class="spinner-text"><text><textPath href="#ring-path">IT · STREAMING · SECURITY · HOMELAB · TOOLS · GUIDES · </textPath></text></g>
+    <circle class="spinner-track" cx="100" cy="100" r="62"/>
+    <circle class="spinner-progress" cx="100" cy="100" r="62" pathLength="100"/>
+    <text class="spinner-num" x="100" y="108" text-anchor="middle">01</text>
+  </svg>
+  <p class="rail-label">Top</p>
+</div>
+<div class="site">
+<header class="site-header">
+  <div class="bar wrap">
+    <a class="logo" href="/" aria-label="wgdively, inc. home">wgdively<span class="logo-comma">,</span> inc.</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-icon" aria-hidden="true"></span><span>Menu</span></button>
+    <div class="menu" id="menu">
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="/downloads/"><span>Downloads</span><span class="num">01</span></a></li>
+          <li><a href="/projects/" aria-current="page"><span>Projects</span><span class="num">02</span></a></li>
+          <li><a href="/tools/"><span>Tools</span><span class="num">03</span></a></li>
+          <li><a href="/guides/"><span>Guides</span><span class="num">04</span></a></li>
+          <li><a href="/contact/"><span>Contact</span><span class="num">05</span></a></li>
+        </ul>
+      </nav>
+      <div class="theme-switch" role="group" aria-label="Color theme">
+        <button type="button" data-theme-set="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+        <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      </div>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="wrap">
+  <header class="page-head" data-section="Server scripts">
+    <p class="eyebrow"><a href="/projects/" style="color:inherit">02 · Projects</a> / Server scripts</p>
+    <h1>Server scripts.</h1>
+    <p class="lede">Four small Bash scripts for an Ubuntu home server. They're short enough to read in a minute, and you should read them before you run them. Each one was checked with ShellCheck and tested on Ubuntu.</p>
+    <div class="callout"><p><strong>Getting a script onto your server:</strong> copy the download link, then on the server run <code>curl -fsSLO</code> followed by the link. Open it with <code>less</code> to read it, then run it with <code>bash</code>. Nothing here pipes straight from the internet into your shell.</p></div>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Scripts">
+    <button class="btn" role="tab" id="t-health" aria-controls="p-health" aria-selected="true">Health report</button>
+    <button class="btn" role="tab" id="t-update" aria-controls="p-update" aria-selected="false" tabindex="-1">Safe update</button>
+    <button class="btn" role="tab" id="t-docker" aria-controls="p-docker" aria-selected="false" tabindex="-1">Docker clean-up</button>
+    <button class="btn" role="tab" id="t-backup" aria-controls="p-backup" aria-selected="false" tabindex="-1">Backups</button>
+  </div>
+
+  <section class="tool-panel" role="tabpanel" id="p-health" aria-labelledby="t-health">
+    <div class="stat-row"><span class="tag ok">Read-only</span><span class="tag">No sudo needed</span></div>
+    <h2 style="margin-top:0">health-report.sh</h2>
+    <p>One screen telling you how the server is doing: uptime, memory, disk space (warns at 90%), temperature, waiting updates, failed services, Docker containers that are unhealthy or stopped, and whether the internet and DNS work.</p>
+    <pre><code>curl -fsSLO https://wgdively.com/scripts/health-report.sh
+bash health-report.sh</code></pre>
+    <div class="btn-row" style="margin-bottom:var(--space-4)"><a class="btn primary" href="/scripts/health-report.sh" download>Download</a><button class="btn" type="button" data-copy-target="#s-health" data-copy-label="Script copied">Copy script</button></div>
+    <details class="notes"><summary>Read the script</summary><pre class="script"><code id="s-health">#!/usr/bin/env bash
+# health-report.sh: a one-screen health check for an Ubuntu home server.
+# From https://wgdively.com/projects/server-scripts/
+# Safe to run any time. It only reads; it changes nothing.
+# Usage:  bash health-report.sh
+set -u
+
+bold=$(tput bold 2&gt;/dev/null || true); dim=$(tput dim 2&gt;/dev/null || true); reset=$(tput sgr0 2&gt;/dev/null || true)
+ok()   { printf '  \e[32m✔\e[0m %s\n' &quot;$*&quot;; }
+warn() { printf '  \e[33m!\e[0m %s\n' &quot;$*&quot;; }
+section() { printf '\n%s%s%s\n' &quot;$bold&quot; &quot;$*&quot; &quot;$reset&quot;; }
+
+section &quot;System&quot;
+echo &quot;  $(hostname) · $(. /etc/os-release &amp;&amp; echo &quot;$PRETTY_NAME&quot;) · kernel $(uname -r)&quot;
+echo &quot;  Up $(uptime -p | sed 's/^up //') · load $(cut -d' ' -f1-3 /proc/loadavg) on $(nproc) CPU threads&quot;
+
+section &quot;Memory&quot;
+free -h | awk 'NR==2{printf &quot;  RAM  %s used of %s (%s available)\n&quot;,$3,$2,$7} NR==3 &amp;&amp; $2!=&quot;0B&quot;{printf &quot;  Swap %s used of %s\n&quot;,$3,$2}'
+
+section &quot;Disks&quot;
+df -h -x tmpfs -x devtmpfs -x squashfs -x overlay -x efivarfs --output=pcent,used,size,target | tail -n +2 | while read -r pct used size target; do
+  n=${pct%\%}
+  if [ &quot;$n&quot; -ge 90 ]; then warn &quot;$target is $pct full ($used of $size)&quot;; else ok &quot;$target $pct ($used of $size)&quot;; fi
+done
+
+section &quot;Temperature&quot;
+if ls /sys/class/thermal/thermal_zone*/temp &gt;/dev/null 2&gt;&amp;1; then
+  max=0; for f in /sys/class/thermal/thermal_zone*/temp; do t=$(( $(cat &quot;$f&quot;) / 1000 )); [ &quot;$t&quot; -gt &quot;$max&quot; ] &amp;&amp; max=$t; done
+  if [ &quot;$max&quot; -ge 85 ]; then warn &quot;Hottest sensor: ${max}°C (hot)&quot;; else ok &quot;Hottest sensor: ${max}°C&quot;; fi
+else echo &quot;  ${dim}No temperature sensors found${reset}&quot;; fi
+
+section &quot;Updates&quot;
+if [ -x /usr/lib/update-notifier/apt-check ]; then
+  IFS=';' read -r all sec &lt; &lt;(/usr/lib/update-notifier/apt-check 2&gt;&amp;1)
+  if [ &quot;${all:-0}&quot; -gt 0 ]; then warn &quot;$all updates waiting ($sec security). Run safe-update.sh&quot;; else ok &quot;Up to date&quot;; fi
+else
+  n=$(apt list --upgradable 2&gt;/dev/null | grep -c upgradable); [ &quot;$n&quot; -gt 0 ] &amp;&amp; warn &quot;$n updates waiting&quot; || ok &quot;Up to date&quot;
+fi
+[ -f /var/run/reboot-required ] &amp;&amp; warn &quot;A restart is needed to finish updates&quot; || ok &quot;No restart needed&quot;
+
+section &quot;Services&quot;
+failed=$(systemctl --failed --no-legend --plain 2&gt;/dev/null | awk '{print $1}')
+if [ -n &quot;$failed&quot; ]; then warn &quot;Failed: $(echo &quot;$failed&quot; | tr '\n' ' ')&quot;; else ok &quot;No failed system services&quot;; fi
+
+if command -v docker &gt;/dev/null 2&gt;&amp;1; then
+  section &quot;Docker&quot;
+  if docker info &gt;/dev/null 2&gt;&amp;1; then
+    total=$(docker ps -q | wc -l); unhealthy=$(docker ps --filter health=unhealthy --format '{{.Names}}')
+    stopped=$(docker ps -a --filter status=exited --filter status=dead --format '{{.Names}}')
+    ok &quot;$total containers running&quot;
+    [ -n &quot;$unhealthy&quot; ] &amp;&amp; warn &quot;Unhealthy: $(echo &quot;$unhealthy&quot; | tr '\n' ' ')&quot;
+    [ -n &quot;$stopped&quot; ] &amp;&amp; warn &quot;Stopped: $(echo &quot;$stopped&quot; | tr '\n' ' ')&quot;
+    echo &quot;  ${dim}Disk used by Docker: $(docker system df --format '{{.Type}} {{.Size}}' | tr '\n' ' ')${reset}&quot;
+  else warn &quot;Docker is installed but you can't reach it (try with sudo, or add yourself to the docker group)&quot;; fi
+fi
+
+section &quot;Network&quot;
+echo &quot;  LAN address: $(hostname -I | awk '{print $1}')&quot;
+if ping -c1 -W2 1.1.1.1 &gt;/dev/null 2&gt;&amp;1; then ok &quot;Internet reachable&quot;; else warn &quot;No internet (ping 1.1.1.1 failed)&quot;; fi
+if getent hosts cloudflare.com &gt;/dev/null 2&gt;&amp;1; then ok &quot;DNS working&quot;; else warn &quot;DNS lookups failing&quot;; fi
+echo</code></pre></details>
+  </section>
+
+  <section class="tool-panel" role="tabpanel" id="p-update" aria-labelledby="t-update" hidden>
+    <div class="stat-row"><span class="tag accent">Changes the system</span><span class="tag">Needs sudo</span></div>
+    <h2 style="margin-top:0">safe-update.sh</h2>
+    <p>Installs all Ubuntu updates without asking questions, keeps your existing config files if a package wants to replace one, tidies up old packages, and logs everything to <code>/var/log/safe-update.log</code>. Give it your compose folder and it updates those containers too. It tells you if a restart is needed, but never restarts by itself.</p>
+    <pre><code>curl -fsSLO https://wgdively.com/scripts/safe-update.sh
+sudo bash safe-update.sh              # packages only
+sudo bash safe-update.sh ~/homelab    # packages + containers</code></pre>
+    <div class="btn-row" style="margin-bottom:var(--space-4)"><a class="btn primary" href="/scripts/safe-update.sh" download>Download</a><button class="btn" type="button" data-copy-target="#s-update" data-copy-label="Script copied">Copy script</button></div>
+    <details class="notes"><summary>Read the script</summary><pre class="script"><code id="s-update">#!/usr/bin/env bash
+# safe-update.sh: update Ubuntu packages (and Docker containers, if you want) with a log.
+# From https://wgdively.com/projects/server-scripts/
+# Usage:  sudo bash safe-update.sh            (system packages only)
+#         sudo bash safe-update.sh ~/homelab  (also pull new images for that compose folder)
+set -euo pipefail
+[ &quot;$(id -u)&quot; -eq 0 ] || { echo &quot;Run it with sudo:  sudo bash $0 $*&quot;; exit 1; }
+
+LOG=/var/log/safe-update.log
+exec &gt; &gt;(tee -a &quot;$LOG&quot;) 2&gt;&amp;1
+echo &quot;=== $(date '+%F %T') safe-update started&quot;
+export DEBIAN_FRONTEND=noninteractive
+
+apt-get update
+# Keep existing config files if a package asks.
+apt-get -y -o Dpkg::Options::=--force-confdef -o Dpkg::Options::=--force-confold full-upgrade
+apt-get -y autoremove --purge
+apt-get -y autoclean
+command -v snap &gt;/dev/null 2&gt;&amp;1 &amp;&amp; snap refresh || true
+
+if [ $# -ge 1 ]; then
+  dir=$1
+  if [ -f &quot;$dir/docker-compose.yml&quot; ] || [ -f &quot;$dir/compose.yaml&quot; ] || [ -f &quot;$dir/compose.yml&quot; ]; then
+    echo &quot;--- Updating containers in $dir&quot;
+    (cd &quot;$dir&quot; &amp;&amp; docker compose pull &amp;&amp; docker compose up -d --remove-orphans)
+    docker image prune -f
+  else
+    echo &quot;!!! No compose file in $dir, so containers were not updated&quot;
+  fi
+fi
+
+if [ -f /var/run/reboot-required ]; then
+  echo &quot;!!! A restart is needed to finish. Run:  sudo reboot&quot;
+else
+  echo &quot;No restart needed.&quot;
+fi
+echo &quot;=== $(date '+%F %T') done. Full log: $LOG&quot;</code></pre></details>
+  </section>
+
+  <section class="tool-panel" role="tabpanel" id="p-docker" aria-labelledby="t-docker" hidden>
+    <div class="stat-row"><span class="tag accent">Deletes unused items</span><span class="tag ok">Never touches volumes</span></div>
+    <h2 style="margin-top:0">docker-cleanup.sh</h2>
+    <p>Docker quietly fills disks with old images and build cache. This shows what it would remove and asks first. It removes stopped containers, unused networks, untagged images and build cache, and leaves your volumes (your data) and any image a container is using alone.</p>
+    <pre><code>curl -fsSLO https://wgdively.com/scripts/docker-cleanup.sh
+bash docker-cleanup.sh          # asks before deleting
+bash docker-cleanup.sh --yes    # no question (for a schedule)</code></pre>
+    <div class="btn-row" style="margin-bottom:var(--space-4)"><a class="btn primary" href="/scripts/docker-cleanup.sh" download>Download</a><button class="btn" type="button" data-copy-target="#s-docker" data-copy-label="Script copied">Copy script</button></div>
+    <details class="notes"><summary>Read the script</summary><pre class="script"><code id="s-docker">#!/usr/bin/env bash
+# docker-cleanup.sh: free disk space Docker no longer needs.
+# From https://wgdively.com/projects/server-scripts/
+# Removes stopped containers, unused networks, dangling images and build cache.
+# It never touches volumes (your data) or images that running containers use.
+# Usage:  bash docker-cleanup.sh          (shows what would go, then asks)
+#         bash docker-cleanup.sh --yes    (no question, for a timer)
+set -euo pipefail
+command -v docker &gt;/dev/null || { echo &quot;Docker isn't installed.&quot;; exit 1; }
+
+echo &quot;Before:&quot;; docker system df
+echo
+echo &quot;Stopped containers that would be removed:&quot;
+docker ps -a --filter status=exited --filter status=created --filter status=dead --format '  {{.Names}} ({{.Image}}, {{.Status}})' || true
+echo
+
+if [ &quot;${1:-}&quot; != &quot;--yes&quot; ]; then
+  read -rp &quot;Clean up now? [y/N] &quot; a
+  [[ &quot;$a&quot; =~ ^[Yy]$ ]] || { echo &quot;Nothing changed.&quot;; exit 0; }
+fi
+
+docker container prune -f
+docker network prune -f
+docker image prune -f
+docker builder prune -f
+echo; echo &quot;After:&quot;; docker system df</code></pre></details>
+  </section>
+
+  <section class="tool-panel" role="tabpanel" id="p-backup" aria-labelledby="t-backup" hidden>
+    <div class="stat-row"><span class="tag">Writes backups</span><span class="tag">Keeps the newest N</span></div>
+    <h2 style="margin-top:0">backup-folder.sh</h2>
+    <p>Makes a dated <code>.tar.gz</code> of a folder (your homelab folder, say), checks the archive opens, and deletes the oldest backups so only the newest few remain. Point it at a USB drive or a second disk. A backup on the same disk won't save you if that disk dies.</p>
+    <pre><code>curl -fsSLO https://wgdively.com/scripts/backup-folder.sh
+bash backup-folder.sh ~/homelab /mnt/usb/backups 7</code></pre>
+    <p class="small muted">Databases (like Uptime Kuma's) are safest to back up while their container is stopped: <code>docker compose stop</code>, back up, then <code>docker compose start</code>.</p>
+    <div class="btn-row" style="margin-bottom:var(--space-4)"><a class="btn primary" href="/scripts/backup-folder.sh" download>Download</a><button class="btn" type="button" data-copy-target="#s-backup" data-copy-label="Script copied">Copy script</button></div>
+    <details class="notes"><summary>Read the script</summary><pre class="script"><code id="s-backup">#!/usr/bin/env bash
+# backup-folder.sh: dated, compressed backups of a folder, keeping the newest few.
+# From https://wgdively.com/projects/server-scripts/
+# Good for a homelab folder (compose files, .env and data). Stops nothing, so for
+# databases it's safest to run while those containers are stopped, or use their own export.
+# Usage:  bash backup-folder.sh SOURCE DESTINATION [HOW_MANY_TO_KEEP]
+#   e.g.  bash backup-folder.sh ~/homelab /mnt/usb/backups 7
+set -euo pipefail
+SRC=${1:-}; DEST=${2:-}; KEEP=${3:-7}
+[ -n &quot;$SRC&quot; ] &amp;&amp; [ -n &quot;$DEST&quot; ] || { sed -n '2,8p' &quot;$0&quot;; exit 1; }
+[ -d &quot;$SRC&quot; ] || { echo &quot;Source folder not found: $SRC&quot;; exit 1; }
+[[ &quot;$KEEP&quot; =~ ^[0-9]+$ ]] &amp;&amp; [ &quot;$KEEP&quot; -ge 1 ] || { echo &quot;HOW_MANY_TO_KEEP must be a number, 1 or more&quot;; exit 1; }
+mkdir -p &quot;$DEST&quot;
+
+name=$(basename &quot;$(realpath &quot;$SRC&quot;)&quot;)
+file=&quot;$DEST/$name-$(date +%Y-%m-%d_%H%M).tar.gz&quot;
+echo &quot;Backing up $SRC to $file&quot;
+# --warning=no-file-changed: don't fail just because a log file changed mid-backup
+tar --warning=no-file-changed -czf &quot;$file.part&quot; -C &quot;$(dirname &quot;$(realpath &quot;$SRC&quot;)&quot;)&quot; &quot;$name&quot; || [ $? -eq 1 ]
+mv &quot;$file.part&quot; &quot;$file&quot;
+tar -tzf &quot;$file&quot; &gt;/dev/null &amp;&amp; echo &quot;Checked: the archive opens fine ($(du -h &quot;$file&quot; | cut -f1)).&quot;
+
+# Keep only the newest $KEEP backups of this folder
+mapfile -t old &lt; &lt;(ls -1t &quot;$DEST/$name-&quot;*.tar.gz 2&gt;/dev/null | tail -n +&quot;$((KEEP + 1))&quot;)
+for f in &quot;${old[@]}&quot;; do rm -f -- &quot;$f&quot; &amp;&amp; echo &quot;Removed old backup $(basename &quot;$f&quot;)&quot;; done
+echo &quot;Done. Backups kept: $(ls -1 &quot;$DEST/$name-&quot;*.tar.gz | wc -l)&quot;</code></pre></details>
+  </section>
+
+  <section class="section reveal prose" data-section="Schedule">
+    <h2>Run them on a schedule</h2>
+    <p>Run <code>sudo crontab -e</code>, add lines like these, and save. The <a href="/tools/cron/">cron explainer</a> turns the times into plain English. Move the scripts somewhere permanent first, for example <code>sudo install -m 755 *.sh /usr/local/bin/</code>.</p>
+    <pre><code># Every Sunday at 4:00 — updates (packages + containers)
+0 4 * * 0  /usr/local/bin/safe-update.sh /home/YOU/homelab
+# Every day at 3:30 — back up the homelab folder, keep a week
+30 3 * * *  /usr/local/bin/backup-folder.sh /home/YOU/homelab /mnt/usb/backups 7 >> /var/log/backup.log 2>&1
+# First of the month at 5:00 — Docker clean-up
+0 5 1 * *  /usr/local/bin/docker-cleanup.sh --yes >> /var/log/docker-cleanup.log 2>&1</code></pre>
+  </section>
+</div>
+<script>
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function pick(t, focus) {
+    tabs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', String(on)); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute('aria-controls')).hidden = !on; });
+    if (focus) t.focus();
+    history.replaceState(null, '', '#' + t.id.slice(2));
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { pick(t); });
+    t.addEventListener('keydown', function (e) {
+      var n = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (n) { e.preventDefault(); pick(tabs[(i + n + tabs.length) % tabs.length], true); }
+    });
+  });
+  var start = document.getElementById('t-' + location.hash.slice(1)); if (start) pick(start);
+})();
+</script>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-logo">wgdively, inc.</p>
+      <p class="footer-tag">Streaming, scheming, and the occasional sudo.</p>
+      <p class="footer-joke">There's no place like 127.0.0.1!</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/downloads/">Downloads</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="footer-meta">
+      <button type="button" class="sound-toggle" aria-pressed="false">Ambient sound: off</button>
+      <p>© <span data-year>2026</span> wgdively, inc. Incorporated in spirit only.</p>
+      <p class="credits">Fonts: Doto, Instrument Sans, JetBrains Mono (SIL OFL). Passphrase words: EFF large wordlist (CC BY 3.0).</p>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="/assets/js/qrcode.js?v=202610201521" defer></script>
+<script src="/assets/js/site.js?v=202610201521" defer></script>
+
+</body>
+</html>

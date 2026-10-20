@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact · wgdively, inc.</title>
+<meta name="description" content="Send a message to wgdively, inc. for Nuvio help, bug reports, IT and homelab questions, or work enquiries.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0e0e0d">
+<meta property="og:title" content="Contact · wgdively, inc.">
+<meta property="og:description" content="Send a message to wgdively, inc. for Nuvio help, bug reports, IT and homelab questions, or work enquiries.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/doto.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t);if(sessionStorage.getItem('entered'))d.classList.add('entered');}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/assets/css/site.css?v=202610201521">
+</head>
+<body class="page-contact">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="rail" aria-hidden="true">
+  <svg class="spinner" viewBox="0 0 200 200">
+    <defs><path id="ring-path" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+    <g class="spinner-text"><text><textPath href="#ring-path">IT · STREAMING · SECURITY · HOMELAB · TOOLS · GUIDES · </textPath></text></g>
+    <circle class="spinner-track" cx="100" cy="100" r="62"/>
+    <circle class="spinner-progress" cx="100" cy="100" r="62" pathLength="100"/>
+    <text class="spinner-num" x="100" y="108" text-anchor="middle">01</text>
+  </svg>
+  <p class="rail-label">Top</p>
+</div>
+<div class="site">
+<header class="site-header">
+  <div class="bar wrap">
+    <a class="logo" href="/" aria-label="wgdively, inc. home">wgdively<span class="logo-comma">,</span> inc.</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-icon" aria-hidden="true"></span><span>Menu</span></button>
+    <div class="menu" id="menu">
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="/downloads/"><span>Downloads</span><span class="num">01</span></a></li>
+          <li><a href="/projects/"><span>Projects</span><span class="num">02</span></a></li>
+          <li><a href="/tools/"><span>Tools</span><span class="num">03</span></a></li>
+          <li><a href="/guides/"><span>Guides</span><span class="num">04</span></a></li>
+          <li><a href="/contact/" aria-current="page"><span>Contact</span><span class="num">05</span></a></li>
+        </ul>
+      </nav>
+      <div class="theme-switch" role="group" aria-label="Color theme">
+        <button type="button" data-theme-set="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+        <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      </div>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="wrap">
+  <header class="page-head" data-section="Contact">
+    <p class="eyebrow">05 · Contact</p>
+    <h1>Send a signal.</h1>
+    <p class="lede">Questions about Nuvio, a bug to report, homelab help, or work for hire. Fill this in and it goes straight to the right inbox. You'll usually get a reply within a couple of days.</p>
+  </header>
+
+  <div class="tool-layout">
+    <aside class="small muted">
+      <p class="label">Before you write</p>
+      <p>For Nuvio problems, include your device, the build number (for example <em>build 22</em>) and what you were doing when it went wrong.</p>
+      <p>Your details are only used to reply to you. They aren't stored on this site or shared with anyone.</p>
+    </aside>
+
+    <form id="contact-form" class="tool-panel" action="/api/contact" method="post" novalidate data-turnstile-sitekey="0x4AAAAAAFdWyJd5M9TyCHAs">
+      <div class="field-row">
+        <div class="field">
+          <label for="c-name">Name <span class="req" aria-hidden="true">*</span></label>
+          <input id="c-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="100" aria-describedby="c-name-err">
+          <p class="error-text" id="c-name-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="c-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input id="c-email" name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby="c-email-err">
+          <p class="error-text" id="c-email-err" hidden></p>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="c-phone">Phone <span class="muted">(optional)</span></label>
+          <input id="c-phone" name="phone" type="tel" autocomplete="tel" maxlength="25" aria-describedby="c-phone-err">
+          <p class="error-text" id="c-phone-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="c-reason">Reason for contact <span class="req" aria-hidden="true">*</span></label>
+          <select id="c-reason" name="reason" required aria-describedby="c-reason-err">
+            <option value="">Choose one…</option>
+            <option>Nuvio help</option>
+            <option>Bug report</option>
+            <option>IT or homelab help</option>
+            <option>Work enquiry</option>
+            <option>Website feedback</option>
+            <option>Something else</option>
+          </select>
+          <p class="error-text" id="c-reason-err" hidden></p>
+        </div>
+      </div>
+      <div class="field">
+        <label for="c-message">Message <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="c-message" name="message" class="prose-input" required minlength="10" maxlength="5000" rows="7" aria-describedby="c-message-err"></textarea>
+        <p class="error-text" id="c-message-err" hidden></p>
+      </div>
+      <div class="hp" aria-hidden="true">
+        <label for="c-website">Leave this empty</label>
+        <input id="c-website" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="field" id="turnstile-slot"></div>
+      <p class="small muted"><span class="req">*</span> Required.</p>
+      <div class="btn-row">
+        <button class="btn primary" type="submit" id="c-send">Send message</button>
+      </div>
+      <div id="c-status" class="callout" role="status" aria-live="polite" hidden style="margin-top:1.25rem"></div>
+    </form>
+  </div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-logo">wgdively, inc.</p>
+      <p class="footer-tag">Streaming, scheming, and the occasional sudo.</p>
+      <p class="footer-joke">There's no place like 127.0.0.1!</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/downloads/">Downloads</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="footer-meta">
+      <button type="button" class="sound-toggle" aria-pressed="false">Ambient sound: off</button>
+      <p>© <span data-year>2026</span> wgdively, inc. Incorporated in spirit only.</p>
+      <p class="credits">Fonts: Doto, Instrument Sans, JetBrains Mono (SIL OFL). Passphrase words: EFF large wordlist (CC BY 3.0).</p>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="/assets/js/qrcode.js?v=202610201521" defer></script>
+<script src="/assets/js/site.js?v=202610201521" defer></script>
+<script src="/assets/js/contact.js?v=202610201521" defer></script>
+</body>
+</html>

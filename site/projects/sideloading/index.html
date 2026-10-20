@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TV sideloading helper: install apps on Fire TV, Android TV, Samsung and LG · wgdively, inc.</title>
+<meta name="description" content="Step-by-step instructions to install apps that aren't in the store on Amazon Fire TV, Android TV and Google TV, Samsung Tizen and LG webOS smart TVs, including Nuvio.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0e0e0d">
+<meta property="og:title" content="TV sideloading helper: install apps on Fire TV, Android TV, Samsung and LG · wgdively, inc.">
+<meta property="og:description" content="Step-by-step instructions to install apps that aren't in the store on Amazon Fire TV, Android TV and Google TV, Samsung Tizen and LG webOS smart TVs, including Nuvio.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/doto.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t);if(sessionStorage.getItem('entered'))d.classList.add('entered');}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/assets/css/site.css?v=202610201521">
+</head>
+<body class="page-projects">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="rail" aria-hidden="true">
+  <svg class="spinner" viewBox="0 0 200 200">
+    <defs><path id="ring-path" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+    <g class="spinner-text"><text><textPath href="#ring-path">IT · STREAMING · SECURITY · HOMELAB · TOOLS · GUIDES · </textPath></text></g>
+    <circle class="spinner-track" cx="100" cy="100" r="62"/>
+    <circle class="spinner-progress" cx="100" cy="100" r="62" pathLength="100"/>
+    <text class="spinner-num" x="100" y="108" text-anchor="middle">01</text>
+  </svg>
+  <p class="rail-label">Top</p>
+</div>
+<div class="site">
+<header class="site-header">
+  <div class="bar wrap">
+    <a class="logo" href="/" aria-label="wgdively, inc. home">wgdively<span class="logo-comma">,</span> inc.</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-icon" aria-hidden="true"></span><span>Menu</span></button>
+    <div class="menu" id="menu">
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="/downloads/"><span>Downloads</span><span class="num">01</span></a></li>
+          <li><a href="/projects/" aria-current="page"><span>Projects</span><span class="num">02</span></a></li>
+          <li><a href="/tools/"><span>Tools</span><span class="num">03</span></a></li>
+          <li><a href="/guides/"><span>Guides</span><span class="num">04</span></a></li>
+          <li><a href="/contact/"><span>Contact</span><span class="num">05</span></a></li>
+        </ul>
+      </nav>
+      <div class="theme-switch" role="group" aria-label="Color theme">
+        <button type="button" data-theme-set="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+        <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      </div>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="wrap">
+  <header class="page-head" data-section="Sideloading">
+    <p class="eyebrow"><a href="/projects/" style="color:inherit">02 · Projects</a> / Sideloading</p>
+    <h1>TV sideloading helper.</h1>
+    <p class="lede">"Sideloading" means installing an app that isn't in your TV's app store. It's allowed on all of these devices, but each one hides the switch somewhere different. Pick yours.</p>
+  </header>
+
+  <div class="tool-panel">
+    <p class="eyebrow" id="sl-q">What are you installing on?</p>
+    <div class="choice-grid" role="group" aria-labelledby="sl-q" id="sl-pick">
+      <button type="button" class="choice" data-sl="firetv" aria-pressed="false"><strong>Amazon Fire TV</strong><span>Fire TV Stick, Cube, Fire TV Edition TVs</span></button>
+      <button type="button" class="choice" data-sl="androidtv" aria-pressed="false"><strong>Android TV / Google TV</strong><span>Chromecast with Google TV, Shield, Sony, TCL, Hisense</span></button>
+      <button type="button" class="choice" data-sl="samsung" aria-pressed="false"><strong>Samsung smart TV</strong><span>Tizen, 2018 and newer</span></button>
+      <button type="button" class="choice" data-sl="lg" aria-pressed="false"><strong>LG smart TV</strong><span>webOS 5 and newer</span></button>
+    </div>
+  </div>
+
+  <section class="tool-panel prose" data-slp="firetv" hidden style="max-width:none">
+    <h2 style="margin-top:0">Amazon Fire TV</h2>
+    <p class="small muted">About 5 minutes. You only do steps 1–3 once.</p>
+    <ol class="steps">
+      <li><strong>Install Downloader.</strong> On the home screen, go to <strong>Find → Search</strong>, type <strong>Downloader</strong>, and install the orange app by AFTVnews. It's free.</li>
+      <li><strong>Turn on Developer Options</strong> if you don't see it: <strong>Settings → My Fire TV → About</strong>, then click your device name (e.g. "Fire TV Stick 4K") <strong>7 times</strong> until it says you're a developer.</li>
+      <li><strong>Allow Downloader to install apps:</strong> <strong>Settings → My Fire TV → Developer Options → Install unknown apps → Downloader → On</strong>.</li>
+      <li><strong>Get the app.</strong> Open Downloader, type <code>wgdively.com/downloads</code> in the address box and press Go. On the page, choose the <strong>Android TV · Fire TV</strong> file and press <strong>Download</strong>.</li>
+      <li>When it finishes, choose <strong>Install</strong>, then <strong>Done</strong>. Downloader offers to delete the file. Say yes to save space.</li>
+      <li>The app is in <strong>Settings → Applications → Manage installed applications</strong>, or hold the Home button and pick <strong>Apps</strong> to move it to your home row.</li>
+    </ol>
+  </section>
+
+  <section class="tool-panel prose" data-slp="androidtv" hidden style="max-width:none">
+    <h2 style="margin-top:0">Android TV and Google TV</h2>
+    <p class="small muted">About 5 minutes. Menu names vary a little between brands.</p>
+    <ol class="steps">
+      <li><strong>Install Downloader</strong> by AFTVnews from the Google Play Store on the TV.</li>
+      <li><strong>Turn on developer options:</strong> <strong>Settings → System → About</strong>, scroll to <strong>Android TV OS build</strong> (or <strong>Build</strong>) and click it <strong>7 times</strong>.</li>
+      <li><strong>Allow Downloader to install apps:</strong> <strong>Settings → Apps → Security &amp; restrictions → Unknown sources → Downloader → On</strong>. On some TVs it's under <strong>Settings → Device Preferences → Security</strong>.</li>
+      <li><strong>Get the app.</strong> Open Downloader, go to <code>wgdively.com/downloads</code>, choose the <strong>Android TV · Google TV · Fire TV</strong> file and press <strong>Download</strong>, then <strong>Install</strong>.</li>
+      <li>Find it under <strong>Apps</strong> on the home screen. On Google TV, open <strong>Apps → See all apps</strong>, then hold Select on it to add it to your favourites.</li>
+    </ol>
+    <div class="callout"><p><strong>Got a phone handy?</strong> Open the downloads page on your phone, tap <strong>QR</strong> next to a file and you'll see the same wgdively.com address the TV can open in Downloader.</p></div>
+  </section>
+
+  <section class="tool-panel prose" data-slp="samsung" hidden style="max-width:none">
+    <h2 style="margin-top:0">Samsung smart TV (Tizen)</h2>
+    <p class="small muted">About 15 minutes the first time. You need a Windows, Mac or Linux computer on the same home network as the TV.</p>
+    <ol class="steps">
+      <li><strong>Find your computer's address.</strong> On Windows, open Command Prompt and run <code>ipconfig</code>; use the <strong>IPv4 Address</strong> (it looks like <code>192.168.1.23</code>). On a Mac, it's in <strong>System Settings → Network</strong>.</li>
+      <li><strong>Turn on Developer Mode on the TV:</strong> open <strong>Apps</strong>, then press <strong>1 2 3 4 5</strong> on the remote (on remotes without numbers, use the on-screen number pad). Switch <strong>Developer Mode</strong> on, type your computer's address as <strong>Host PC IP</strong>, press OK.</li>
+      <li><strong>Restart the TV</strong>: hold the power button on the remote until the Samsung logo appears.</li>
+      <li><strong>Download the Nuvio TV Installer</strong> for your computer from the <a href="/downloads/#nuvio-tv-installer">downloads page</a> and open it.</li>
+      <li>Choose <strong>Samsung</strong>, enter the TV's address (on the TV: <strong>Settings → General → Network → Network Status → IP Settings</strong>), and press <strong>Install / Update</strong>. The installer downloads the right Nuvio TV build, signs it for your TV and installs it.</li>
+      <li>Nuvio appears in <strong>Apps</strong> on the TV. Use the installer's <strong>Install / Update</strong> again for new versions.</li>
+    </ol>
+    <div class="callout"><p><strong>Which TVs?</strong> 2021 and newer models (Tizen 6+) get the full build. 2018–2020 models (Tizen 4–5.5) get the legacy build. The installer picks for you. Use the same computer for updates: it keeps your TV's signing certificate, and Samsung only accepts updates signed with the same one.</p></div>
+  </section>
+
+  <section class="tool-panel prose" data-slp="lg" hidden style="max-width:none">
+    <h2 style="margin-top:0">LG smart TV (webOS)</h2>
+    <p class="small muted">About 15 minutes the first time. You need a computer on the same home network and a free LG Developer account.</p>
+    <ol class="steps">
+      <li><strong>Make a free account</strong> at <a href="https://webostv.developer.lge.com/" rel="noopener">webostv.developer.lge.com</a>.</li>
+      <li>On the TV, install <strong>Developer Mode</strong> from the LG Content Store, open it and sign in with that account.</li>
+      <li>Switch <strong>Dev Mode Status</strong> on (the TV restarts), open the app again and switch <strong>Key Server</strong> on. Note the <strong>passphrase</strong> it shows and the TV's IP address.</li>
+      <li><strong>Download the Nuvio TV Installer</strong> from the <a href="/downloads/#nuvio-tv-installer">downloads page</a>, open it, and choose <strong>LG TV</strong>.</li>
+      <li>Enter the TV's IP address and the passphrase, then press <strong>Install / Update</strong>. Nuvio appears in your apps.</li>
+    </ol>
+    <div class="callout"><p><strong>Keep Developer Mode alive.</strong> The Developer Mode app shows a session timer. Open it every so often and press <strong>Extend</strong>, or LG removes sideloaded apps when the timer runs out. You can reinstall them with the installer.</p></div>
+  </section>
+
+  <p class="small muted">Not sure which Nuvio file you need? <a href="/tools/nuvio-picker/">Which Nuvio do I need?</a> asks one or two questions and gives you the right one.</p>
+</div>
+<script>
+(function () {
+  var btns = Array.prototype.slice.call(document.querySelectorAll('[data-sl]'));
+  function pick(id, scroll) {
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-sl') === id)); });
+    document.querySelectorAll('[data-slp]').forEach(function (p) { p.hidden = p.getAttribute('data-slp') !== id; });
+    var panel = document.querySelector('[data-slp="' + id + '"]');
+    if (panel && scroll) panel.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    history.replaceState(null, '', '#' + id);
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { pick(b.getAttribute('data-sl'), true); }); });
+  var h = location.hash.slice(1); if (document.querySelector('[data-slp="' + h + '"]')) pick(h, false);
+})();
+</script>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-logo">wgdively, inc.</p>
+      <p class="footer-tag">Streaming, scheming, and the occasional sudo.</p>
+      <p class="footer-joke">There's no place like 127.0.0.1!</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/downloads/">Downloads</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="footer-meta">
+      <button type="button" class="sound-toggle" aria-pressed="false">Ambient sound: off</button>
+      <p>© <span data-year>2026</span> wgdively, inc. Incorporated in spirit only.</p>
+      <p class="credits">Fonts: Doto, Instrument Sans, JetBrains Mono (SIL OFL). Passphrase words: EFF large wordlist (CC BY 3.0).</p>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="/assets/js/qrcode.js?v=202610201521" defer></script>
+<script src="/assets/js/site.js?v=202610201521" defer></script>
+
+</body>
+</html>

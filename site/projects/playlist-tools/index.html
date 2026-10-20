@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M3U playlist toolkit: clean, de-duplicate and check against an XMLTV guide · wgdively, inc.</title>
+<meta name="description" content="Open an M3U or M3U8 IPTV playlist in your browser to see its channels and groups, remove duplicates and broken entries, filter groups, check tvg-ids against an XMLTV EPG, and save a clean copy.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0e0e0d">
+<meta property="og:title" content="M3U playlist toolkit: clean, de-duplicate and check against an XMLTV guide · wgdively, inc.">
+<meta property="og:description" content="Open an M3U or M3U8 IPTV playlist in your browser to see its channels and groups, remove duplicates and broken entries, filter groups, check tvg-ids against an XMLTV EPG, and save a clean copy.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/doto.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t);if(sessionStorage.getItem('entered'))d.classList.add('entered');}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/assets/css/site.css?v=202610201521">
+</head>
+<body class="page-projects">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="rail" aria-hidden="true">
+  <svg class="spinner" viewBox="0 0 200 200">
+    <defs><path id="ring-path" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+    <g class="spinner-text"><text><textPath href="#ring-path">IT · STREAMING · SECURITY · HOMELAB · TOOLS · GUIDES · </textPath></text></g>
+    <circle class="spinner-track" cx="100" cy="100" r="62"/>
+    <circle class="spinner-progress" cx="100" cy="100" r="62" pathLength="100"/>
+    <text class="spinner-num" x="100" y="108" text-anchor="middle">01</text>
+  </svg>
+  <p class="rail-label">Top</p>
+</div>
+<div class="site">
+<header class="site-header">
+  <div class="bar wrap">
+    <a class="logo" href="/" aria-label="wgdively, inc. home">wgdively<span class="logo-comma">,</span> inc.</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-icon" aria-hidden="true"></span><span>Menu</span></button>
+    <div class="menu" id="menu">
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="/downloads/"><span>Downloads</span><span class="num">01</span></a></li>
+          <li><a href="/projects/" aria-current="page"><span>Projects</span><span class="num">02</span></a></li>
+          <li><a href="/tools/"><span>Tools</span><span class="num">03</span></a></li>
+          <li><a href="/guides/"><span>Guides</span><span class="num">04</span></a></li>
+          <li><a href="/contact/"><span>Contact</span><span class="num">05</span></a></li>
+        </ul>
+      </nav>
+      <div class="theme-switch" role="group" aria-label="Color theme">
+        <button type="button" data-theme-set="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+        <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      </div>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="wrap">
+  <header class="page-head" data-section="Playlist toolkit">
+    <p class="eyebrow"><a href="/projects/" style="color:inherit">02 · Projects</a> / Playlists</p>
+    <h1>Playlist toolkit.</h1>
+    <p class="lede">For live TV playlists (M3U / M3U8) and their TV guides (XMLTV / EPG). See what's inside, throw out duplicates, dead entries and groups you never watch, check which channels have guide data, then save a tidy copy to use in Nuvio or any player.</p>
+    <p class="small muted"><span class="tag ok">Runs in your browser</span> Your playlist is never uploaded. Playlists often contain private login links, so this matters.</p>
+  </header>
+
+  <div id="pl-tool">
+    <section class="tool-panel" id="pl-load" data-section="Open">
+      <h2 style="margin-top:0">1. Open a playlist</h2>
+      <div class="field-row">
+        <div class="field"><label for="pl-file">From a file (.m3u, .m3u8, .gz)</label><input type="file" id="pl-file" accept=".m3u,.m3u8,.txt,.gz,audio/x-mpegurl,application/vnd.apple.mpegurl"></div>
+        <div class="field"><label for="pl-url">Or from a link</label><div style="display:flex;gap:var(--space-2)"><input type="url" id="pl-url" placeholder="https://…/playlist.m3u" autocomplete="off"><button class="btn" type="button" id="pl-fetch">Open</button></div><p class="hint">Only works if the provider allows it. Downloading the file always works.</p></div>
+      </div>
+      <details class="notes" style="padding:0"><summary>Or paste it</summary>
+        <label class="visually-hidden" for="pl-paste">Paste playlist text</label>
+        <textarea id="pl-paste" placeholder="#EXTM3U&#10;#EXTINF:-1 tvg-id=&quot;…&quot; group-title=&quot;News&quot;,Channel name&#10;https://…"></textarea>
+        <div class="btn-row" style="margin-top:var(--space-2)"><button class="btn" type="button" id="pl-paste-go">Use pasted text</button></div>
+      </details>
+      <p class="small" id="pl-status" aria-live="polite"></p>
+      <h3>Optional: a TV guide</h3>
+      <div class="field"><label for="pl-gfile">XMLTV guide (.xml or .xml.gz)</label><input type="file" id="pl-gfile" accept=".xml,.gz,text/xml,application/xml"><p class="hint">Shows which channels will have programme info. Matches on <code>tvg-id</code>.</p></div>
+      <p class="small" id="pl-gstatus" aria-live="polite"></p>
+    </section>
+
+    <div id="pl-out" hidden>
+      <section class="tool-panel" data-section="Clean">
+        <h2 style="margin-top:0">2. Clean it up</h2>
+        <div class="field-row">
+          <label class="check"><input type="checkbox" id="pl-dup-url" checked> Remove duplicate links</label>
+          <label class="check"><input type="checkbox" id="pl-dup-name"> Remove duplicate names (keeps the first)</label>
+          <label class="check"><input type="checkbox" id="pl-bad" checked> Remove entries with no valid link</label>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="pl-sort">Order</label><select id="pl-sort"><option value="">As in the file</option><option value="group">By group, then name</option><option value="name">By name</option></select></div>
+          <div class="field"><label for="pl-q">Keep only channels matching</label><input type="search" id="pl-q" placeholder="e.g. sports, uk, hd" autocomplete="off"></div>
+        </div>
+        <div class="btn-row" style="margin-bottom:var(--space-3)"><button class="btn small" type="button" id="pl-all">Keep all groups</button><button class="btn small" type="button" id="pl-none">Untick all groups</button></div>
+        <fieldset class="pick-grid" id="pl-groups"></fieldset>
+      </section>
+
+      <section class="tool-panel" data-section="Result">
+        <h2 style="margin-top:0">3. Result</h2>
+        <div class="stat-row" id="pl-stats" aria-live="polite"></div>
+        <div class="btn-row" style="margin-bottom:var(--space-4)">
+          <button class="btn primary" type="button" id="pl-save">Save cleaned playlist</button>
+          <button class="btn" type="button" id="pl-missing">Export channels missing guide data (CSV)</button>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>Channel</th><th>Group</th><th>tvg-id</th><th id="pl-guide-col" hidden>In guide</th></tr></thead><tbody id="pl-rows"></tbody></table></div>
+        <p class="small muted" id="pl-more"></p>
+      </section>
+    </div>
+  </div>
+
+  <section class="section reveal prose" data-section="Help">
+    <h2>What the words mean</h2>
+    <dl class="kv">
+      <dt>M3U / M3U8</dt><dd style="font-family:var(--font-body)">A text file listing channels: one <code>#EXTINF</code> line with the name and details, then the stream link.</dd>
+      <dt>tvg-id</dt><dd style="font-family:var(--font-body)">The channel's ID in the TV guide. If it's missing or misspelled, the channel shows no programme info.</dd>
+      <dt>group-title</dt><dd style="font-family:var(--font-body)">The folder a channel appears in, like News or Sports.</dd>
+      <dt>XMLTV / EPG</dt><dd style="font-family:var(--font-body)">The TV guide file: channel IDs plus what's on and when.</dd>
+    </dl>
+    <p class="small muted">This tool doesn't test whether streams actually play. A browser can't do that reliably, and checking thousands of links would hammer the provider.</p>
+  </section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-logo">wgdively, inc.</p>
+      <p class="footer-tag">Streaming, scheming, and the occasional sudo.</p>
+      <p class="footer-joke">There's no place like 127.0.0.1!</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/downloads/">Downloads</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="footer-meta">
+      <button type="button" class="sound-toggle" aria-pressed="false">Ambient sound: off</button>
+      <p>© <span data-year>2026</span> wgdively, inc. Incorporated in spirit only.</p>
+      <p class="credits">Fonts: Doto, Instrument Sans, JetBrains Mono (SIL OFL). Passphrase words: EFF large wordlist (CC BY 3.0).</p>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="/assets/js/qrcode.js?v=202610201521" defer></script>
+<script src="/assets/js/site.js?v=202610201521" defer></script>
+<script src="/assets/js/proj-playlist.js?v=202610201521" defer></script>
+</body>
+</html>

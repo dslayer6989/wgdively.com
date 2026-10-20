@@ -1,0 +1,15 @@
+<div class="tool-panel">
+  <div class="table-wrap" style="margin-bottom:1rem"><table id="cm-table"><thead><tr><th></th><th scope="col">Read (4)</th><th scope="col">Write (2)</th><th scope="col">Execute (1)</th></tr></thead><tbody></tbody></table></div>
+  <div class="field-row">
+    <label class="check"><input type="checkbox" id="cm-suid"> setuid (4)</label>
+    <label class="check"><input type="checkbox" id="cm-sgid"> setgid (2)</label>
+    <label class="check"><input type="checkbox" id="cm-stky"> sticky (1)</label>
+  </div>
+  <div class="field-row">
+    <div class="field"><label for="cm-oct">Octal</label><input id="cm-oct" type="text" value="755" inputmode="numeric" maxlength="4" spellcheck="false"></div>
+    <div class="field"><label for="cm-sym">Symbolic</label><input id="cm-sym" type="text" value="rwxr-xr-x" maxlength="9" spellcheck="false"></div>
+  </div>
+  <p class="error-text" id="cm-err" hidden></p>
+</div>
+<div class="tool-panel"><p class="label">Command</p><div class="copy-wrap"><pre class="output" id="cm-cmd"></pre><button class="btn small copy-btn" type="button" data-copy-target="#cm-cmd" data-copy-label="Command copied">Copy</button></div><p id="cm-explain" class="small muted" style="margin-top:.75rem"></p></div>
+<div class="tool-panel"><p class="label">Common choices</p><div class="btn-row" id="cm-presets"></div></div>

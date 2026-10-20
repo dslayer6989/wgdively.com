@@ -1,0 +1,9 @@
+<div class="tool-panel">
+  <div class="field"><label for="cr-in">Cron expression (5 fields: minute hour day-of-month month day-of-week)</label><input id="cr-in" type="text" value="*/15 2-5 * * 1-5" spellcheck="false" autocomplete="off" class="mono"></div>
+  <p class="hint">Also understands <code>@hourly</code>, <code>@daily</code>, <code>@weekly</code>, <code>@monthly</code>, <code>@yearly</code>, <code>@reboot</code>, month and day names like <code>JAN</code> and <code>MON</code>, and <code>7</code> for Sunday.</p>
+  <p class="error-text" id="cr-err" hidden></p>
+  <p class="big-out" id="cr-say" aria-live="polite" style="font-family:var(--font-body);font-weight:500"></p>
+</div>
+<div class="tool-panel"><p class="label">Next 8 runs (your local time)</p><pre class="output" id="cr-next"></pre></div>
+<div class="tool-panel"><p class="label">Examples</p><div class="btn-row" id="cr-ex"></div></div>
+<div class="callout small"><p>Standard Vixie/cronie rule: if <em>both</em> day-of-month and day-of-week are restricted, the job runs when <em>either</em> matches. On a server, cron uses the server's time zone, so check it with <code>timedatectl</code>. systemd timers use a different format (<code>OnCalendar=</code>).</p></div>

@@ -1,0 +1,24 @@
+<div class="tool-panel">
+  <div class="filter-bar" role="group" aria-label="QR content type" style="margin-bottom:1rem">
+    <button type="button" class="chip" data-qrm="text" aria-pressed="true">Link or text</button>
+    <button type="button" class="chip" data-qrm="wifi" aria-pressed="false">Wi-Fi login</button>
+  </div>
+  <div id="qr-text-wrap" class="field"><label for="qr-text">Link or text</label><textarea id="qr-text" rows="3" spellcheck="false">https://wgdively.com/downloads/</textarea></div>
+  <div id="qr-wifi-wrap" hidden>
+    <div class="field-row">
+      <div class="field"><label for="qr-ssid">Network name (SSID)</label><input id="qr-ssid" type="text" autocomplete="off"></div>
+      <div class="field"><label for="qr-pass">Password</label><input id="qr-pass" type="text" autocomplete="off" spellcheck="false"></div>
+      <div class="field"><label for="qr-sec">Security</label><select id="qr-sec"><option value="WPA">WPA / WPA2 / WPA3</option><option value="WEP">WEP (old)</option><option value="nopass">None (open)</option></select></div>
+    </div>
+    <label class="check"><input type="checkbox" id="qr-hidden"> Hidden network</label>
+  </div>
+  <div class="field-row" style="margin-top:1rem">
+    <div class="field"><label for="qr-ecc">Error correction</label><select id="qr-ecc"><option value="L">Low (7%)</option><option value="M" selected>Medium (15%)</option><option value="Q">Quartile (25%)</option><option value="H">High (30%)</option></select></div>
+  </div>
+</div>
+<div class="tool-panel" style="text-align:center">
+  <div class="qr-box" id="qr-out"></div>
+  <p class="small muted" id="qr-info"></p>
+  <div class="btn-row" style="justify-content:center"><button class="btn primary" type="button" id="qr-png">Download PNG</button><button class="btn" type="button" id="qr-svg">Download SVG</button></div>
+</div>
+<div class="callout small"><p>Made entirely in your browser, so Wi-Fi passwords never leave your device. A Wi-Fi QR lets guests join by pointing their phone camera at it. Print one for the fridge.</p></div>

@@ -1,0 +1,25 @@
+<div class="tool-panel">
+  <div class="field-row">
+    <div class="field">
+      <label for="sn-in">IP address with prefix (CIDR)</label>
+      <input id="sn-in" type="text" value="192.168.1.10/24" spellcheck="false" autocomplete="off" inputmode="text">
+      <p class="hint">Examples: <code>10.0.0.0/8</code>, <code>172.16.5.4 255.255.240.0</code>, <code>2001:db8::1/64</code></p>
+    </div>
+    <div class="field">
+      <label for="sn-prefix">Or pick a prefix</label>
+      <select id="sn-prefix"></select>
+    </div>
+  </div>
+  <p class="error-text" id="sn-err" hidden></p>
+</div>
+<div class="tool-panel">
+  <dl class="kv" id="sn-out"></dl>
+</div>
+<div class="tool-panel">
+  <p class="label">Split this network into smaller subnets</p>
+  <div class="field-row">
+    <div class="field"><label for="sn-split">New prefix</label><select id="sn-split"></select></div>
+  </div>
+  <div class="output" id="sn-split-out" style="max-height:18rem;overflow:auto"></div>
+</div>
+<div class="callout small"><p><strong>Tip:</strong> home networks are usually <code>/24</code> (254 devices). A <code>/31</code> is for point-to-point links: two usable addresses and no broadcast, per RFC 3021. A <code>/32</code> is a single host. Private ranges are <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code> and <code>192.168.0.0/16</code>. <code>100.64.0.0/10</code> is used by carrier-grade NAT and Tailscale.</p></div>

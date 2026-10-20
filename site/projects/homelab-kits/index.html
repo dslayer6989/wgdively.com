@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homelab starter kits: Docker Compose builder · wgdively, inc.</title>
+<meta name="description" content="Pick self-hosted services like Jellyfin, AdGuard Home, Uptime Kuma, Homepage and qBittorrent behind a VPN, and get a ready-to-run docker-compose.yml, .env file and setup steps.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0e0e0d">
+<meta property="og:title" content="Homelab starter kits: Docker Compose builder · wgdively, inc.">
+<meta property="og:description" content="Pick self-hosted services like Jellyfin, AdGuard Home, Uptime Kuma, Homepage and qBittorrent behind a VPN, and get a ready-to-run docker-compose.yml, .env file and setup steps.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/doto.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t);if(sessionStorage.getItem('entered'))d.classList.add('entered');}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/assets/css/site.css?v=202610201521">
+</head>
+<body class="page-projects">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="rail" aria-hidden="true">
+  <svg class="spinner" viewBox="0 0 200 200">
+    <defs><path id="ring-path" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+    <g class="spinner-text"><text><textPath href="#ring-path">IT · STREAMING · SECURITY · HOMELAB · TOOLS · GUIDES · </textPath></text></g>
+    <circle class="spinner-track" cx="100" cy="100" r="62"/>
+    <circle class="spinner-progress" cx="100" cy="100" r="62" pathLength="100"/>
+    <text class="spinner-num" x="100" y="108" text-anchor="middle">01</text>
+  </svg>
+  <p class="rail-label">Top</p>
+</div>
+<div class="site">
+<header class="site-header">
+  <div class="bar wrap">
+    <a class="logo" href="/" aria-label="wgdively, inc. home">wgdively<span class="logo-comma">,</span> inc.</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-icon" aria-hidden="true"></span><span>Menu</span></button>
+    <div class="menu" id="menu">
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="/downloads/"><span>Downloads</span><span class="num">01</span></a></li>
+          <li><a href="/projects/" aria-current="page"><span>Projects</span><span class="num">02</span></a></li>
+          <li><a href="/tools/"><span>Tools</span><span class="num">03</span></a></li>
+          <li><a href="/guides/"><span>Guides</span><span class="num">04</span></a></li>
+          <li><a href="/contact/"><span>Contact</span><span class="num">05</span></a></li>
+        </ul>
+      </nav>
+      <div class="theme-switch" role="group" aria-label="Color theme">
+        <button type="button" data-theme-set="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+        <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      </div>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="wrap">
+  <header class="page-head" data-section="Homelab kits">
+    <p class="eyebrow"><a href="/projects/" style="color:inherit">02 · Projects</a> / Homelab</p>
+    <h1>Homelab starter kits.</h1>
+    <p class="lede">An old PC, a mini PC or a Raspberry Pi 4/5 running Ubuntu can run all of this. Choose a kit or pick services one by one. You get a single <code>docker-compose.yml</code>, a settings file, and steps written for your exact choice.</p>
+  </header>
+
+  <div id="hk-builder">
+    <section class="tool-panel reveal" data-section="Pick">
+      <h2 style="margin-top:0">1. Pick a kit</h2>
+      <div class="choice-grid" role="group" aria-label="Kits">
+        <button type="button" class="choice" data-preset="starter" aria-pressed="false"><strong>Starter</strong><span>Start page, ad blocking, uptime alerts and logs.</span></button>
+        <button type="button" class="choice" data-preset="media" aria-pressed="false"><strong>Media</strong><span>Jellyfin plus VPN-only downloads.</span></button>
+        <button type="button" class="choice" data-preset="admin" aria-pressed="false"><strong>Admin</strong><span>Monitoring, Portainer and file sync.</span></button>
+        <button type="button" class="choice" data-preset="all" aria-pressed="false"><strong>Everything</strong><span>All eight services.</span></button>
+      </div>
+      <h2>2. Fine-tune <span class="tag accent" id="hk-count" style="vertical-align:middle"></span></h2>
+      <div id="hk-list"></div>
+    </section>
+
+    <p class="callout" id="hk-empty" hidden>Tick at least one service to build a kit.</p>
+    <div id="hk-output">
+      <div class="callout" id="hk-warn" hidden></div>
+      <section class="tool-panel reveal" data-section="Files">
+        <h2 style="margin-top:0">3. Your files</h2>
+        <h3>docker-compose.yml</h3>
+        <div class="btn-row" style="margin-bottom:var(--space-3)"><button class="btn primary" type="button" id="hk-dl-compose">Download docker-compose.yml</button><button class="btn" type="button" data-copy-target="#hk-compose" data-copy-label="Compose file copied">Copy</button></div>
+        <pre class="script"><code id="hk-compose"></code></pre>
+        <h3>.env (your settings)</h3>
+        <div class="btn-row" style="margin-bottom:var(--space-3)"><button class="btn" type="button" id="hk-dl-env">Download .env</button><button class="btn" type="button" data-copy-target="#hk-env" data-copy-label=".env copied">Copy</button></div>
+        <pre class="script"><code id="hk-env"></code></pre>
+        <p class="small muted">Some browsers save <code>.env</code> as <code>env</code> or <code>env.txt</code>. Rename it to <code>.env</code> on the server.</p>
+      </section>
+      <section class="tool-panel reveal prose" data-section="Steps" style="max-width:none">
+        <h2 style="margin-top:0">4. Set it up</h2>
+        <div id="hk-steps"></div>
+      </section>
+    </div>
+  </div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-logo">wgdively, inc.</p>
+      <p class="footer-tag">Streaming, scheming, and the occasional sudo.</p>
+      <p class="footer-joke">There's no place like 127.0.0.1!</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/downloads/">Downloads</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="footer-meta">
+      <button type="button" class="sound-toggle" aria-pressed="false">Ambient sound: off</button>
+      <p>© <span data-year>2026</span> wgdively, inc. Incorporated in spirit only.</p>
+      <p class="credits">Fonts: Doto, Instrument Sans, JetBrains Mono (SIL OFL). Passphrase words: EFF large wordlist (CC BY 3.0).</p>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="/assets/js/qrcode.js?v=202610201521" defer></script>
+<script src="/assets/js/site.js?v=202610201521" defer></script>
+<script src="/assets/js/proj-homelab.js?v=202610201521" defer></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<div class="tool-panel">
+  <div class="filter-bar" role="group" aria-label="Input type" style="margin-bottom:1rem">
+    <button type="button" class="chip" data-hmode="text" aria-pressed="true">Text</button>
+    <button type="button" class="chip" data-hmode="file" aria-pressed="false">File</button>
+  </div>
+  <div id="h-text-wrap" class="field"><label for="h-text">Text</label><textarea id="h-text" spellcheck="false">hello world</textarea></div>
+  <div id="h-file-wrap" class="field" hidden><label for="h-file">File</label><input id="h-file" type="file"><p class="hint">The file is read in your browser and never uploaded. Large files can take a few seconds.</p></div>
+  <div class="field"><label for="h-verify">Paste a checksum to verify (optional)</label><input id="h-verify" type="text" spellcheck="false" autocomplete="off" placeholder="e.g. the SHA-256 from a download page"></div>
+</div>
+<div class="tool-panel"><dl class="kv" id="h-out"></dl><p id="h-match" aria-live="polite" style="margin:1rem 0 0"></p></div>
+<div class="callout small"><p><strong>Checking a Nuvio download:</strong> on the Downloads page, use <em>SHA-256 copy</em>, paste it above, then pick the file you downloaded. A green match means the file arrived intact. MD5 and SHA-1 are shown for old checksums only. They're broken for security purposes, so don't rely on them to prove a file is safe.</p></div>

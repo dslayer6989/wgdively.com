@@ -1,0 +1,11 @@
+<div class="tool-panel">
+  <div class="field-row">
+    <div class="field"><label for="en-mode">Format</label><select id="en-mode"><option value="b64">Base64</option><option value="b64url">Base64URL (JWT-style)</option><option value="url">URL (percent) encoding</option><option value="urlall">URL, encode every character</option><option value="hex">Hex</option><option value="html">HTML entities</option><option value="bin">Binary</option></select></div>
+  </div>
+  <div class="field"><label for="en-in">Input</label><textarea id="en-in" spellcheck="false">Streaming, scheming & the occasional sudo ✓</textarea></div>
+  <div class="btn-row" style="margin-bottom:1rem"><button class="btn primary" type="button" id="en-enc">Encode ↓</button><button class="btn" type="button" id="en-dec">Decode ↓</button><button class="btn ghost" type="button" id="en-swap">↑ Use output as input</button></div>
+  <div class="field"><label for="en-out">Output</label><textarea id="en-out" spellcheck="false" readonly></textarea></div>
+  <p class="error-text" id="en-err" hidden></p>
+  <button class="btn small" type="button" data-copy-target="#en-out" data-copy-label="Output copied">Copy output</button>
+</div>
+<div class="callout small"><p>All text is handled as UTF-8, so emoji and accents survive the round trip. Base64 is <em>encoding, not encryption</em>: anyone can decode it.</p></div>

@@ -1,0 +1,16 @@
+<div class="tool-panel">
+  <div class="copy-wrap"><p class="big-out output" id="pp-out" aria-live="polite" style="padding-right:5.5rem"></p><button class="btn small copy-btn" type="button" data-copy-target="#pp-out" data-copy-label="Passphrase copied">Copy</button></div>
+  <p class="small muted" id="pp-bits" style="margin-top:.75rem"></p>
+  <div class="btn-row"><button class="btn primary" type="button" id="pp-go">Generate new</button></div>
+</div>
+<div class="tool-panel">
+  <div class="field-row">
+    <div class="field"><label for="pp-n">Words</label><select id="pp-n"><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option><option>10</option></select></div>
+    <div class="field"><label for="pp-sep">Separator</label><select id="pp-sep"><option value="-">Hyphen  -</option><option value=" ">Space</option><option value=".">Dot  .</option><option value="_">Underscore  _</option><option value="">None</option></select></div>
+  </div>
+  <div class="field-row">
+    <label class="check"><input type="checkbox" id="pp-cap"> Capitalise each word</label>
+    <label class="check"><input type="checkbox" id="pp-num"> Add a number</label>
+  </div>
+</div>
+<div class="callout small"><p>Words come from the <a href="https://www.eff.org/dice">EFF large wordlist</a> (7,776 words, so 12.9 bits per word), picked with your browser's secure random generator. Six words is about 77 bits: strong, and much easier to type on a TV remote than <code>x7#Qp!…</code>. The list is downloaded from this site; your passphrase never leaves your device.</p></div>

@@ -1,0 +1,41 @@
+<!--meta {"title": "Starting your download · wgdively, inc.", "description": "Your Nuvio download is starting.", "section": "downloads"} -->
+<div class="wrap">
+  <header class="page-head">
+    <p class="eyebrow">Download</p>
+    <h1 id="dl-title">Starting your download…</h1>
+    <p class="lede" id="dl-text">Your file should start downloading in a moment. You can close this page once it does.</p>
+    <div class="btn-row" id="dl-actions" hidden>
+      <a class="btn primary" id="dl-again" href="/downloads/">Download again</a>
+      <a class="btn" href="/downloads/">All downloads</a>
+    </div>
+  </header>
+  <div class="callout" id="dl-help" hidden>
+    <p><strong>Installing on Android:</strong> open the file from your notifications or the Downloads app. The first time, Android asks you to allow installs from your browser. Turn it on, go back, and tap <strong>Install</strong>.</p>
+  </div>
+</div>
+<script>
+(function () {
+  // Only files from these public repos can be started from a QR code. That stops
+  // anyone using this page to send people to some other site.
+  var ALLOWED = ['NuvioDesktop', 'NuvioTVSmart', 'NuvioTV', 'NuvioTVSmart-Installer'];
+  var q = new URLSearchParams(location.search);
+  var repo = q.get('r') || '', tag = q.get('t') || '', file = q.get('f') || '';
+  var ok = ALLOWED.indexOf(repo) !== -1 && /^[\w.\-]{1,100}$/.test(tag) && /^[\w.\-+ ()]{1,200}$/.test(file);
+  var title = document.getElementById('dl-title'), text = document.getElementById('dl-text');
+  if (!ok) {
+    title.textContent = 'That download link isn\u2019t valid';
+    text.textContent = 'The QR code or link may be incomplete. Pick your file from the downloads page instead.';
+    document.getElementById('dl-actions').hidden = false;
+    document.getElementById('dl-again').hidden = true;
+    return;
+  }
+  // Older QR codes point here; the file itself comes from wgdively.com/get/… (never GitHub).
+  var url = '/get/' + encodeURIComponent(repo) + '/' + encodeURIComponent(tag) + '/' + encodeURIComponent(file);
+  title.textContent = 'Downloading ' + file;
+  document.getElementById('dl-again').href = url;
+  document.getElementById('dl-actions').hidden = false;
+  if (/\.apk$/i.test(file)) document.getElementById('dl-help').hidden = false;
+  // The site API sends files as attachments, so the browser saves the file and stays on this page.
+  setTimeout(function () { location.href = url; }, 400);
+})();
+</script>
