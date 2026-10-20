@@ -1,0 +1,11 @@
+{
+  "name": "wgdively.com",
+  "private": true,
+  "description": "Source of wgdively.com. Page sources live in build/pages; `npm run build` writes the finished site into site/.",
+  "type": "module",
+  "scripts": {
+    "build": "node build/build.mjs",
+    "build:offline": "node build/build.mjs --offline"
+  },
+  "engines": { "node": ">=20" }
+}

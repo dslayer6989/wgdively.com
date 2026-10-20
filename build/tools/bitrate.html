@@ -1,0 +1,28 @@
+<div class="tool-panel">
+  <p class="label">File size from bitrate and length</p>
+  <div class="field-row">
+    <div class="field"><label for="br-v">Video bitrate</label><input id="br-v" type="number" min="0" step="0.1" value="8"></div>
+    <div class="field"><label for="br-vu">Unit</label><select id="br-vu"><option value="1000">Mbps</option><option value="1">kbps</option></select></div>
+    <div class="field"><label for="br-a">Audio bitrate (kbps)</label><input id="br-a" type="number" min="0" step="1" value="640"></div>
+  </div>
+  <div class="field-row">
+    <div class="field"><label for="br-h">Hours</label><input id="br-h" type="number" min="0" value="2"></div>
+    <div class="field"><label for="br-m">Minutes</label><input id="br-m" type="number" min="0" max="59" value="0"></div>
+    <div class="field"><label for="br-s">Seconds</label><input id="br-s" type="number" min="0" max="59" value="0"></div>
+  </div>
+  <dl class="kv" id="br-out"></dl>
+</div>
+<div class="tool-panel">
+  <p class="label">Bitrate from file size and length</p>
+  <div class="field-row">
+    <div class="field"><label for="rb-size">File size</label><input id="rb-size" type="number" min="0" step="0.01" value="25"></div>
+    <div class="field"><label for="rb-u">Unit</label><select id="rb-u"><option value="1e9">GB</option><option value="1e6">MB</option><option value="1073741824">GiB</option></select></div>
+    <div class="field"><label for="rb-min">Length (minutes)</label><input id="rb-min" type="number" min="1" value="120"></div>
+  </div>
+  <dl class="kv" id="rb-out"></dl>
+</div>
+<div class="tool-panel">
+  <p class="label">Typical bitrates and the internet speed you need</p>
+  <div class="table-wrap" style="margin:0"><table><thead><tr><th>Quality</th><th>Typical bitrate</th><th>Per hour</th><th>Comfortable internet speed</th></tr></thead><tbody id="br-table"></tbody></table></div>
+  <p class="hint">The speed column allows about 1.5× headroom for streaming. Remuxes and Blu-ray rips peak much higher than their average, so 4K remuxes really want 150 Mbps or more, or a wired connection.</p>
+</div>

@@ -1,0 +1,18 @@
+<div class="tool-panel">
+  <p class="label">Your public IPv4</p>
+  <p class="big-out" id="ip4">Checking…</p>
+  <p class="label" style="margin-top:1.25rem">Your public IPv6</p>
+  <p class="big-out" id="ip6">Checking…</p>
+  <div class="btn-row" style="margin-top:1rem">
+    <button class="btn small" type="button" data-copy-target="#ip4" data-copy-label="IPv4 copied">Copy IPv4</button>
+    <button class="btn small" type="button" data-copy-target="#ip6" data-copy-label="IPv6 copied">Copy IPv6</button>
+    <button class="btn small ghost" type="button" id="ip-refresh">Check again</button>
+  </div>
+</div>
+<div class="tool-panel">
+  <p class="label">Connection details</p>
+  <dl class="kv" id="ip-trace"><dt>Status</dt><dd>Checking…</dd></dl>
+</div>
+<div class="callout small">
+  <p><strong>Where this comes from:</strong> Cloudflare's public trace service (<code>1.1.1.1/cdn-cgi/trace</code>). Your browser asks it directly over IPv4 and over IPv6. If you're using a VPN, you'll see the VPN's address, which is a quick way to check the VPN is working. "Not available" for IPv6 means your network or provider doesn't offer it. That's common and nothing to worry about.</p>
+</div>

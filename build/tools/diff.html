@@ -1,0 +1,21 @@
+<div class="tool-panel">
+  <div class="field-row">
+    <div class="field"><label for="df-a">Original</label><textarea id="df-a" rows="10" spellcheck="false">PermitRootLogin yes
+PasswordAuthentication yes
+Port 22
+X11Forwarding yes
+MaxAuthTries 6</textarea></div>
+    <div class="field"><label for="df-b">Changed</label><textarea id="df-b" rows="10" spellcheck="false">PermitRootLogin prohibit-password
+PasswordAuthentication yes
+Port 22
+X11Forwarding no
+MaxAuthTries 3
+LoginGraceTime 30</textarea></div>
+  </div>
+  <div class="field-row">
+    <label class="check"><input type="checkbox" id="df-ws"> Ignore spaces at line ends</label>
+    <label class="check"><input type="checkbox" id="df-case"> Ignore upper/lower case</label>
+  </div>
+</div>
+<p id="df-sum" class="small muted" aria-live="polite"></p>
+<div class="tool-panel copy-wrap"><pre class="output" id="df-out" style="padding:0;max-height:32rem;overflow:auto"></pre><button class="btn small copy-btn" type="button" data-copy-target="#df-out" data-copy-label="Diff copied">Copy</button></div>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free IT tools: network, security, developer and streaming · wgdively, inc.</title>
+<meta name="description" content="Free in-browser IT tools: what's my IP, subnet calculator, DNS lookup, password and passphrase generators, hashes, JWT decoder, JSON, regex, cron, chmod, QR codes and streaming calculators.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0e0e0d">
+<meta property="og:title" content="Free IT tools: network, security, developer and streaming · wgdively, inc.">
+<meta property="og:description" content="Free in-browser IT tools: what's my IP, subnet calculator, DNS lookup, password and passphrase generators, hashes, JWT decoder, JSON, regex, cron, chmod, QR codes and streaming calculators.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/doto.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')d.setAttribute('data-theme',t);if(sessionStorage.getItem('entered'))d.classList.add('entered');}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/assets/css/site.css?v=202610201505">
+</head>
+<body class="page-tools">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="rail" aria-hidden="true">
+  <svg class="spinner" viewBox="0 0 200 200">
+    <defs><path id="ring-path" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs>
+    <g class="spinner-text"><text><textPath href="#ring-path">IT · STREAMING · SECURITY · HOMELAB · TOOLS · GUIDES · </textPath></text></g>
+    <circle class="spinner-track" cx="100" cy="100" r="62"/>
+    <circle class="spinner-progress" cx="100" cy="100" r="62" pathLength="100"/>
+    <text class="spinner-num" x="100" y="108" text-anchor="middle">01</text>
+  </svg>
+  <p class="rail-label">Top</p>
+</div>
+<div class="site">
+<header class="site-header">
+  <div class="bar wrap">
+    <a class="logo" href="/" aria-label="wgdively, inc. home">wgdively<span class="logo-comma">,</span> inc.</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-icon" aria-hidden="true"></span><span>Menu</span></button>
+    <div class="menu" id="menu">
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="/downloads/"><span>Downloads</span><span class="num">01</span></a></li>
+          <li><a href="/projects/"><span>Projects</span><span class="num">02</span></a></li>
+          <li><a href="/tools/" aria-current="page"><span>Tools</span><span class="num">03</span></a></li>
+          <li><a href="/guides/"><span>Guides</span><span class="num">04</span></a></li>
+          <li><a href="/contact/"><span>Contact</span><span class="num">05</span></a></li>
+        </ul>
+      </nav>
+      <div class="theme-switch" role="group" aria-label="Color theme">
+        <button type="button" data-theme-set="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+        <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      </div>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><span></span></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="wrap">
+  <header class="page-head" data-section="Tools">
+    <p class="eyebrow">03 · Tools</p>
+    <h1>The toolbox.</h1>
+    <p class="lede">26 utilities for network checks, security, server admin and streaming. Most run entirely in your browser, so nothing you type leaves your device. The few that need the internet are marked.</p>
+    <nav class="filter-bar" aria-label="Jump to a category" style="margin:1.5rem 0 0">
+      <a class="chip" href="#network">Network</a><a class="chip" href="#security">Security</a><a class="chip" href="#dev">Admin & developer</a><a class="chip" href="#streaming">Streaming</a><a class="chip" href="/tools/links/">Trusted links</a>
+    </nav>
+  </header>
+  <section class="section reveal" id="network" data-section="Network"><div class="section-head"><h2>Network</h2><span class="section-num">01 / 04</span></div><div class="grid"><a class="card" href="/tools/my-ip/"><span class="meta">Online lookup</span><h3>What’s my IP</h3><p>Your public IPv4 and IPv6 addresses, plus the Cloudflare data centre you’re connected through.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/subnet/"><span class="meta">Runs in your browser</span><h3>Subnet calculator</h3><p>CIDR to network, broadcast, host range, mask and wildcard. Handles /31 and /32 correctly.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/dns/"><span class="meta">Online lookup</span><h3>DNS lookup</h3><p>Look up A, AAAA, CNAME, MX, TXT, NS, CAA and more over encrypted DNS (Cloudflare or Google).</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/ports/"><span class="meta">Runs in your browser</span><h3>Port reference</h3><p>A searchable list of common TCP and UDP ports for servers, homelabs, games and streaming.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/device/"><span class="meta">Runs in your browser</span><h3>Browser &amp; device info</h3><p>Everything your browser shares about your device: screen, time zone, language, graphics and features.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/links/"><span class="meta">Project</span><h3>Trusted links directory</h3><p>Hand-picked outside sites for diagnostics, security, homelab and learning to hack.</p><span class="go">Open →</span></a></div></section>
+<section class="section reveal" id="security" data-section="Security"><div class="section-head"><h2>Security</h2><span class="section-num">02 / 04</span></div><div class="grid"><a class="card" href="/tools/password/"><span class="meta">Runs in your browser</span><h3>Password generator</h3><p>Strong random passwords from your browser’s secure random generator, with strength shown in bits.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/passphrase/"><span class="meta">Runs in your browser</span><h3>Passphrase generator</h3><p>Easy-to-type passphrases from the EFF’s 7,776-word list (the Diceware method).</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/strength/"><span class="meta">Online lookup</span><h3>Password strength check</h3><p>Estimates how guessable a password is and can check it against known breaches without sending the password.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/hash/"><span class="meta">Runs in your browser</span><h3>Hash &amp; checksum</h3><p>MD5, SHA-1, SHA-256, SHA-384 and SHA-512 for text or files. Paste a checksum to verify a download.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/jwt/"><span class="meta">Runs in your browser</span><h3>JWT decoder</h3><p>Read the header and claims inside a JSON Web Token, with expiry times in plain English.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/encode/"><span class="meta">Runs in your browser</span><h3>Encoder / decoder</h3><p>Base64, Base64URL, URL encoding, hex and HTML entities, both ways and UTF-8 safe.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/uuid/"><span class="meta">Runs in your browser</span><h3>UUID generator</h3><p>Random v4 UUIDs or time-ordered v7 UUIDs, in bulk.</p><span class="go">Open →</span></a></div></section>
+<section class="section reveal" id="dev" data-section="Admin &amp; developer"><div class="section-head"><h2>Admin &amp; developer</h2><span class="section-num">03 / 04</span></div><div class="grid"><a class="card" href="/tools/json/"><span class="meta">Runs in your browser</span><h3>JSON formatter</h3><p>Format, minify, check and sort JSON, with the exact line and column of any error.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/regex/"><span class="meta">Runs in your browser</span><h3>Regex tester</h3><p>Test JavaScript regular expressions with live highlighting, capture groups and replace.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/chmod/"><span class="meta">Runs in your browser</span><h3>chmod calculator</h3><p>Switch between Linux permission checkboxes, octal (755) and symbolic (rwxr-xr-x).</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/cron/"><span class="meta">Runs in your browser</span><h3>Cron explainer</h3><p>Turns a crontab line into plain English and lists the next times it will run.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/timestamp/"><span class="meta">Runs in your browser</span><h3>Timestamp converter</h3><p>Unix seconds or milliseconds to dates and back, in UTC and your local time.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/diff/"><span class="meta">Runs in your browser</span><h3>Text diff</h3><p>Compares two blocks of text line by line, like a config file before and after.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/qr/"><span class="meta">Runs in your browser</span><h3>QR code generator</h3><p>QR codes for links, text or Wi-Fi logins. Download them as PNG or SVG.</p><span class="go">Open →</span></a>
+<a class="card" href="/projects/windows-toolkit/"><span class="meta">Project</span><h3>Windows toolkit builder</h3><p>Pick apps and tweaks, then download a ready-to-run PowerShell setup script.</p><span class="go">Open →</span></a></div></section>
+<section class="section reveal" id="streaming" data-section="Streaming"><div class="section-head"><h2>Streaming</h2><span class="section-num">04 / 04</span></div><div class="grid"><a class="card" href="/tools/nuvio-picker/"><span class="meta">Runs in your browser</span><h3>Which Nuvio do I need?</h3><p>Answer one or two questions and get the right Nuvio file for your device.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/bitrate/"><span class="meta">Runs in your browser</span><h3>Bitrate &amp; file size</h3><p>Works out file size from bitrate and length (or the reverse), plus how much internet speed a stream needs.</p><span class="go">Open →</span></a>
+<a class="card" href="/tools/resolution/"><span class="meta">Runs in your browser</span><h3>Resolution &amp; aspect ratio</h3><p>Aspect ratios, resizing at the same ratio, common resolutions and screen pixel density.</p><span class="go">Open →</span></a>
+<a class="card" href="/projects/playlist-tools/"><span class="meta">Project</span><h3>Playlist toolkit (M3U &amp; EPG)</h3><p>Check, clean and de-duplicate M3U playlists and match them against XMLTV guides.</p><span class="go">Open →</span></a>
+<a class="card" href="/projects/sideloading/"><span class="meta">Project</span><h3>TV sideloading helper</h3><p>Step-by-step installs for Fire TV, Android TV, Samsung and LG.</p><span class="go">Open →</span></a></div></section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-logo">wgdively, inc.</p>
+      <p class="footer-tag">Streaming, scheming, and the occasional sudo.</p>
+      <p class="footer-joke">There's no place like 127.0.0.1!</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/downloads/">Downloads</a></li>
+        <li><a href="/projects/">Projects</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/guides/">Guides</a></li>
+        <li><a href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="footer-meta">
+      <button type="button" class="sound-toggle" aria-pressed="false">Ambient sound: off</button>
+      <p>© <span data-year>2026</span> wgdively, inc. Incorporated in spirit only.</p>
+      <p class="credits">Fonts: Doto, Instrument Sans, JetBrains Mono (SIL OFL). Passphrase words: EFF large wordlist (CC BY 3.0).</p>
+    </div>
+  </div>
+</footer>
+</div>
+<script src="/assets/js/qrcode.js?v=202610201505" defer></script>
+<script src="/assets/js/site.js?v=202610201505" defer></script>
+
+</body>
+</html>

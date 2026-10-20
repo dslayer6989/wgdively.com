@@ -1,0 +1,13 @@
+<div class="tool-panel">
+  <form id="dns-form" class="field-row" style="align-items:end">
+    <div class="field"><label for="dns-name">Domain name</label><input id="dns-name" type="text" value="wgdively.com" spellcheck="false" autocomplete="off" autocapitalize="off"></div>
+    <div class="field"><label for="dns-type">Record type</label>
+      <select id="dns-type"><option>ALL</option><option>A</option><option>AAAA</option><option>CNAME</option><option>MX</option><option>TXT</option><option>NS</option><option>SOA</option><option>CAA</option><option>SRV</option><option>PTR</option><option>HTTPS</option></select></div>
+    <div class="field"><label for="dns-resolver">Ask</label>
+      <select id="dns-resolver"><option value="cf">Cloudflare (1.1.1.1)</option><option value="google">Google (8.8.8.8)</option></select></div>
+    <div class="field"><button class="btn primary" type="submit" style="width:100%">Look up</button></div>
+  </form>
+  <p class="hint">For a reverse lookup (PTR), just type an IP address like <code>1.1.1.1</code>. The tool turns it into the right <code>in-addr.arpa</code> name for you.</p>
+</div>
+<div id="dns-out"></div>
+<div class="callout small"><p><strong>How it works:</strong> your browser asks the chosen resolver directly using DNS over HTTPS. The results are what the public internet sees, which may differ from your home router's answer if you use local DNS like Pi-hole or AdGuard Home. <strong>AD</strong> means the answer was DNSSEC-validated.</p></div>

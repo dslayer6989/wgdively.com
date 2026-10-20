@@ -1,0 +1,5 @@
+<div class="tool-panel"><div class="field"><label for="jwt-in">Paste a JWT</label><textarea id="jwt-in" spellcheck="false" rows="5">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkV4YW1wbGUgVXNlciIsImlhdCI6MTc2MDkwMDAwMCwiZXhwIjoxNzkyNDM2MDAwfQ.signature-not-checked</textarea></div><p class="error-text" id="jwt-err" hidden></p></div>
+<div class="tool-panel"><p class="label">Summary</p><dl class="kv" id="jwt-sum"></dl></div>
+<div class="tool-panel"><p class="label">Header</p><pre id="jwt-h" class="output"></pre></div>
+<div class="tool-panel"><p class="label">Payload (claims)</p><pre id="jwt-p" class="output"></pre></div>
+<div class="callout warn small"><p><strong>Decoding isn't verifying.</strong> Anyone can read a JWT. This tool doesn't check the signature, so never trust a token just because it decodes. Tokens are like passwords: only paste ones from test systems, or ones that have already expired. This page decodes everything locally and sends nothing.</p></div>

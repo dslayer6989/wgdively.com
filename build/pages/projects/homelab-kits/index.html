@@ -1,0 +1,41 @@
+<!--meta {"title": "Homelab starter kits: Docker Compose builder · wgdively, inc.", "description": "Pick self-hosted services like Jellyfin, AdGuard Home, Uptime Kuma, Homepage and qBittorrent behind a VPN, and get a ready-to-run docker-compose.yml, .env file and setup steps.", "section": "projects", "scripts": ["/assets/js/proj-homelab.js"]} -->
+<div class="wrap">
+  <header class="page-head" data-section="Homelab kits">
+    <p class="eyebrow"><a href="/projects/" style="color:inherit">02 · Projects</a> / Homelab</p>
+    <h1>Homelab starter kits.</h1>
+    <p class="lede">An old PC, a mini PC or a Raspberry Pi 4/5 running Ubuntu can run all of this. Choose a kit or pick services one by one. You get a single <code>docker-compose.yml</code>, a settings file, and steps written for your exact choice.</p>
+  </header>
+
+  <div id="hk-builder">
+    <section class="tool-panel reveal" data-section="Pick">
+      <h2 style="margin-top:0">1. Pick a kit</h2>
+      <div class="choice-grid" role="group" aria-label="Kits">
+        <button type="button" class="choice" data-preset="starter" aria-pressed="false"><strong>Starter</strong><span>Start page, ad blocking, uptime alerts and logs.</span></button>
+        <button type="button" class="choice" data-preset="media" aria-pressed="false"><strong>Media</strong><span>Jellyfin plus VPN-only downloads.</span></button>
+        <button type="button" class="choice" data-preset="admin" aria-pressed="false"><strong>Admin</strong><span>Monitoring, Portainer and file sync.</span></button>
+        <button type="button" class="choice" data-preset="all" aria-pressed="false"><strong>Everything</strong><span>All eight services.</span></button>
+      </div>
+      <h2>2. Fine-tune <span class="tag accent" id="hk-count" style="vertical-align:middle"></span></h2>
+      <div id="hk-list"></div>
+    </section>
+
+    <p class="callout" id="hk-empty" hidden>Tick at least one service to build a kit.</p>
+    <div id="hk-output">
+      <div class="callout" id="hk-warn" hidden></div>
+      <section class="tool-panel reveal" data-section="Files">
+        <h2 style="margin-top:0">3. Your files</h2>
+        <h3>docker-compose.yml</h3>
+        <div class="btn-row" style="margin-bottom:var(--space-3)"><button class="btn primary" type="button" id="hk-dl-compose">Download docker-compose.yml</button><button class="btn" type="button" data-copy-target="#hk-compose" data-copy-label="Compose file copied">Copy</button></div>
+        <pre class="script"><code id="hk-compose"></code></pre>
+        <h3>.env (your settings)</h3>
+        <div class="btn-row" style="margin-bottom:var(--space-3)"><button class="btn" type="button" id="hk-dl-env">Download .env</button><button class="btn" type="button" data-copy-target="#hk-env" data-copy-label=".env copied">Copy</button></div>
+        <pre class="script"><code id="hk-env"></code></pre>
+        <p class="small muted">Some browsers save <code>.env</code> as <code>env</code> or <code>env.txt</code>. Rename it to <code>.env</code> on the server.</p>
+      </section>
+      <section class="tool-panel reveal prose" data-section="Steps" style="max-width:none">
+        <h2 style="margin-top:0">4. Set it up</h2>
+        <div id="hk-steps"></div>
+      </section>
+    </div>
+  </div>
+</div>

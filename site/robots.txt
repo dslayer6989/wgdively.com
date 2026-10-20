@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /dl/
+Disallow: /get/
+Disallow: /api/
+
+Sitemap: https://wgdively.com/sitemap.xml

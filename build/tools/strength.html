@@ -1,0 +1,14 @@
+<div class="tool-panel">
+  <div class="field"><label for="st-in">Password to check</label>
+    <div style="display:flex;gap:.5rem"><input id="st-in" type="password" autocomplete="off" spellcheck="false" autocapitalize="off"><button class="btn" type="button" id="st-show" aria-pressed="false">Show</button></div></div>
+  <div class="meter" aria-hidden="true"><span id="st-meter"></span></div>
+  <p class="big-out" id="st-verdict" style="margin-top:1rem" aria-live="polite">Type a password</p>
+  <dl class="kv" id="st-details"></dl>
+</div>
+<div class="tool-panel">
+  <p class="label">Has it appeared in a data breach?</p>
+  <p class="small muted">This uses Have I Been Pwned's k-anonymity check. Your browser hashes the password with SHA-1 and sends only the <strong>first 5 characters</strong> of that hash. The full password and full hash never leave your device.</p>
+  <button class="btn" type="button" id="st-pwned">Check breaches</button>
+  <p id="st-pwned-out" aria-live="polite" style="margin-top:1rem"></p>
+</div>
+<div class="callout small"><p>The estimate looks for common passwords, keyboard patterns (<code>qwerty</code>, <code>1q2w3e</code>), repeats, sequences, years and "l33t" swaps. Then it works out the time to crack at 10 billion guesses a second, an offline attack with a modern graphics card. It's a guide, not a guarantee. A random password from a generator always beats a clever one you made up.</p></div>

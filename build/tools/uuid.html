@@ -1,0 +1,10 @@
+<div class="tool-panel">
+  <div class="field-row">
+    <div class="field"><label for="uu-ver">Version</label><select id="uu-ver"><option value="4">v4 (random)</option><option value="7">v7 (time-ordered, good for databases)</option></select></div>
+    <div class="field"><label for="uu-n">How many</label><select id="uu-n"><option>1</option><option selected>5</option><option>10</option><option>25</option><option>100</option></select></div>
+    <div class="field"><label for="uu-case">Format</label><select id="uu-case"><option value="lower">lowercase</option><option value="upper">UPPERCASE</option><option value="braces">{braces}</option><option value="nodash">no dashes</option></select></div>
+  </div>
+  <div class="btn-row" style="margin-bottom:1rem"><button class="btn primary" type="button" id="uu-go">Generate</button><button class="btn" type="button" data-copy-target="#uu-out" data-copy-label="UUIDs copied">Copy all</button></div>
+  <pre class="output" id="uu-out"></pre>
+</div>
+<div class="callout small"><p>v4 has 122 random bits. v7 (RFC 9562) starts with a millisecond timestamp, so new IDs sort in creation order, which keeps database indexes fast. Both use your browser's secure random generator.</p></div>

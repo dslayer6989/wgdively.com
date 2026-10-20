@@ -1,0 +1,38 @@
+<!--meta {"title": "Windows toolkit builder: one script to set up a new PC · wgdively, inc.", "description": "Tick the apps and settings you want on a new or reset Windows 10 or 11 PC and download one readable PowerShell script that installs everything with winget.", "section": "projects", "scripts": ["/assets/js/proj-windows.js"]} -->
+<div class="wrap">
+  <header class="page-head" data-section="Windows toolkit">
+    <p class="eyebrow"><a href="/projects/" style="color:inherit">02 · Projects</a> / Windows</p>
+    <h1>Windows toolkit builder.</h1>
+    <p class="lede">Setting up a new or freshly reset PC? Tick what you want, download one script, run it, and go make a coffee. Apps come from <strong>winget</strong>, Microsoft's own package manager that's built into Windows 10 and 11. Each app downloads from its official publisher.</p>
+  </header>
+
+  <div id="wt-builder">
+    <section class="tool-panel reveal" data-section="Apps">
+      <div class="section-head" style="margin-bottom:var(--space-4)"><h2 style="margin:0">1. Apps</h2><button class="btn small" type="button" id="wt-all">Untick all</button></div>
+      <div id="wt-apps"></div>
+    </section>
+    <section class="tool-panel reveal" data-section="Settings">
+      <h2 style="margin-top:0">2. Settings</h2>
+      <p class="small muted">These change settings for your user account only, and you can switch any of them back in Settings later.</p>
+      <div id="wt-tweaks"></div>
+    </section>
+    <section class="tool-panel reveal" data-section="Script">
+      <div class="section-head" style="margin-bottom:var(--space-4)"><h2 style="margin:0">3. Your script</h2><span class="tag accent" id="wt-count"></span></div>
+      <div class="btn-row" style="margin-bottom:var(--space-4)">
+        <button class="btn primary" type="button" id="wt-dl">Download wgdively-setup.ps1</button>
+        <button class="btn" type="button" data-copy-target="#wt-out" data-copy-label="Script copied">Copy script</button>
+      </div>
+      <pre class="script"><code id="wt-out"></code></pre>
+    </section>
+  </div>
+
+  <section class="section reveal prose" data-section="How to run">
+    <h2>How to run it</h2>
+    <ol class="steps">
+      <li>Open your <strong>Downloads</strong> folder, right-click <code>wgdively-setup.ps1</code> and choose <strong>Run with PowerShell</strong>.</li>
+      <li>If a blue box asks about the execution policy, type <kbd>Y</kbd> and press Enter. If nothing happens instead, open PowerShell in your Downloads folder and run <code>powershell -ExecutionPolicy Bypass -File .\wgdively-setup.ps1</code>.</li>
+      <li>Some installers ask for admin permission. Click <strong>Yes</strong>. When it says <strong>Done</strong>, restart the PC.</li>
+    </ol>
+    <div class="callout"><p><strong>No winget?</strong> The script notices and opens <strong>App Installer</strong> in the Microsoft Store. Install or update it, then run the script again. Brand-new PCs sometimes need a few minutes of Windows Update first.</p></div>
+  </section>
+</div>

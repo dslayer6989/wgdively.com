@@ -1,0 +1,12 @@
+<div class="tool-panel">
+  <div class="field"><label for="js-in">JSON</label><textarea id="js-in" rows="12" spellcheck="false">{"site":"wgdively.com","tools":26,"tags":["it","streaming","homelab"],"nested":{"ok":true,"value":null}}</textarea></div>
+  <div class="btn-row">
+    <button class="btn primary" type="button" data-js="pretty">Format</button>
+    <button class="btn" type="button" data-js="min">Minify</button>
+    <button class="btn" type="button" data-js="sort">Sort keys</button>
+    <label class="check" style="margin-left:.5rem">Indent <select id="js-indent" style="width:auto;min-height:2.2rem;padding:.2rem .5rem;margin-left:.3rem"><option value="2">2 spaces</option><option value="4">4 spaces</option><option value="tab">Tab</option></select></label>
+  </div>
+</div>
+<p id="js-status" aria-live="polite"></p>
+<div class="tool-panel copy-wrap"><pre class="output" id="js-out" style="max-height:30rem;overflow:auto"></pre><button class="btn small copy-btn" type="button" data-copy-target="#js-out" data-copy-label="JSON copied">Copy</button></div>
+<div class="callout small"><p>Errors show the exact line and column. Common culprits are trailing commas, single quotes and missing quotes around keys. All of those are fine in JavaScript but not in JSON.</p></div>

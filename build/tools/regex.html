@@ -1,0 +1,15 @@
+<div class="tool-panel">
+  <div class="field-row">
+    <div class="field" style="grid-column:span 2"><label for="rx-p">Pattern</label><input id="rx-p" type="text" spellcheck="false" autocomplete="off" value="(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})"></div>
+    <div class="field"><label for="rx-f">Flags</label><input id="rx-f" type="text" value="g" spellcheck="false" autocomplete="off" maxlength="8"></div>
+  </div>
+  <p class="hint">Flags: <code>g</code> all matches · <code>i</code> ignore case · <code>m</code> multiline · <code>s</code> dot matches newline · <code>u</code> Unicode</p>
+  <p class="error-text" id="rx-err" hidden></p>
+  <div class="field"><label for="rx-t">Test text</label><textarea id="rx-t" rows="6" spellcheck="false">Router: 192.168.1.1
+Pi-hole: 192.168.1.53
+Public DNS: 1.1.1.1 and 8.8.8.8</textarea></div>
+</div>
+<div class="tool-panel"><p class="label" id="rx-count">Matches</p><div class="output" id="rx-hl"></div></div>
+<div class="tool-panel"><p class="label">Capture groups</p><div class="table-wrap" style="margin:0"><table><thead><tr><th>#</th><th>Match</th><th>Index</th><th>Groups</th></tr></thead><tbody id="rx-groups"></tbody></table></div></div>
+<div class="tool-panel"><div class="field"><label for="rx-r">Replace with</label><input id="rx-r" type="text" value="$1.$2.$3.x" spellcheck="false"><p class="hint">Use <code>$1</code> for group 1, <code>$&amp;</code> for the whole match, <code>$&lt;name&gt;</code> for named groups.</p></div><pre class="output" id="rx-rep"></pre></div>
+<div class="callout small"><p>This tests <strong>JavaScript</strong> regular expressions. Most basics work the same in Python, PowerShell (.NET) and grep -E, but lookbehind and named groups can differ.</p></div>
