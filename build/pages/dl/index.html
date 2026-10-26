@@ -17,7 +17,7 @@
 (function () {
   // Only files from these public repos can be started from a QR code. That stops
   // anyone using this page to send people to some other site.
-  var ALLOWED = ['NuvioDesktop', 'NuvioTVSmart', 'NuvioTV', 'NuvioTVSmart-Installer'];
+  var ALLOWED = ['NuvioDesktop', 'NuvioMobile', 'NuvioTV', 'NuvioTVSmart', 'NuvioTVSmart-Installer'];
   var q = new URLSearchParams(location.search);
   var repo = q.get('r') || '', tag = q.get('t') || '', file = q.get('f') || '';
   var ok = ALLOWED.indexOf(repo) !== -1 && /^[\w.\-]{1,100}$/.test(tag) && /^[\w.\-+ ()]{1,200}$/.test(file);
