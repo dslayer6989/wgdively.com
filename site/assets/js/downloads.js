@@ -36,7 +36,6 @@
     [/Windows\.msi$/i, 'Windows installer', 'Windows 10 and 11 PCs.'],
     [/Tizen\.wgt$/i, 'Samsung TV · 2019 and newer', 'Tizen 5.0 or newer. Install it with the Nuvio TV Installer.'],
     [/webOS.*\.ipk$/i, 'LG TV (webOS)', 'webOS 5 or newer. Install it with the Nuvio TV Installer or webOS Dev Manager.'],
-    [/\.patch$/i, 'Source patch', 'For developers: the changes that add Live TV to the original app.'],
     [/\.AppImage$/i, 'Linux (AppImage)', 'Make it executable, then run it.'],
     [/\.exe$/i, 'Windows', 'Windows 10 and 11.'],
     [/\.dmg$/i, 'macOS', ''],
@@ -114,6 +113,8 @@
 
   function releaseCard(p, rel, opts) {
     opts = opts || {};
+    // Source patches are for developers, so they aren't listed.
+    rel = Object.assign({}, rel, { assets: rel.assets.filter(function (a) { return !/\.patch$/i.test(a.name); }) });
         var heading = opts.heading || rel.name || rel.tag;
     return '<article class="release' + (opts.latest ? ' latest' : '') + '">' +
       '<div class="release-head"><div><h3>' + esc(heading) + '</h3><div class="sub">' + esc(rel.tag) + ' · ' + esc(date(rel.published)) + '</div></div>' +
