@@ -8,19 +8,22 @@
   'use strict';
   var WG = window.WG, $ = WG.$, esc = WG.esc;
   var OWNER = 'dslayer6989';
-  var CACHE_KEY = 'wg-releases-v1';
+  var CACHE_KEY = 'wg-releases-v2';
 
+  // One section per repo, each showing only that repo's latest release.
   var PRODUCTS = [
-    { repo: 'NuvioDesktop', id: 'nuvio-live-tv', title: 'Nuvio Live TV', kicker: 'Android · Android TV · Windows',
-      blurb: 'The main Nuvio app for phones, tablets, Android TV boxes, Fire TV and Windows PCs. Movies, TV shows, anime and live TV in one place.',
+    { repo: 'NuvioMobile', id: 'nuvio-mobile', title: 'Nuvio Live TV for Mobile', kicker: 'Android phones & tablets · iPhone · iPad',
+      blurb: 'The Nuvio app with Live TV for phones and tablets. Most Android phones want the phone file. iPhone and iPad users get an unsigned file for SideStore or AltStore.',
       alpha: true },
-    { repo: 'NuvioTVSmart', id: 'nuvio-smart-tv', title: 'Nuvio TV for Smart TVs', kicker: 'Samsung Tizen · LG webOS',
-      blurb: 'Builds for Samsung and LG smart TVs. Every build comes in two versions: one for 2021-and-newer Samsung TVs (plus LG webOS), and a legacy one for 2018–2020 Samsung TVs.',
-      paired: true },
+    { repo: 'NuvioDesktop', id: 'nuvio-desktop', title: 'Nuvio Live TV for Windows', kicker: 'Windows',
+      blurb: 'The Nuvio desktop app with Live TV for Windows 10 and 11 PCs. It replaces the regular Nuvio desktop app and keeps your settings.',
+      alpha: true },
+    { repo: 'NuvioTV', id: 'nuvio-android-tv', title: 'Nuvio Live TV for Android TV', kicker: 'Android TV · Google TV · Fire TV',
+      blurb: 'A dedicated big-screen build for Android TV, Google TV and Fire TV devices.' },
+    { repo: 'NuvioTVSmart', id: 'nuvio-smart-tv', title: 'Nuvio Live TV for Smart TVs', kicker: 'Samsung Tizen · LG webOS',
+      blurb: 'For Samsung TVs from 2019 on (Tizen 5.0+) and LG TVs with webOS 5 or newer. Install it with the Nuvio TV Installer below.' },
     { repo: 'NuvioTVSmart-Installer', id: 'nuvio-tv-installer', title: 'Nuvio TV Installer', kicker: 'Windows · Linux',
-      blurb: 'A desktop helper that signs and installs the Smart TV build onto your Samsung or LG TV over your home network. Samsung builds are unsigned on purpose; the installer signs them for your TV.' },
-    { repo: 'NuvioTV', id: 'nuvio-android-tv', title: 'Nuvio TV for Android TV', kicker: 'Android TV · Google TV',
-      blurb: 'A dedicated big-screen build for Android TV and Google TV devices.' }
+      blurb: 'A desktop helper that signs and installs the Smart TV build onto your Samsung or LG TV over your home network.' }
   ];
 
   var LABELS = [
@@ -29,10 +32,11 @@
     [/older-32bit\.apk$/i, 'Older Android (32-bit)', 'Older or budget devices that won\'t install the phone build.'],
     [/x86_64\.apk$/i, 'Android x86_64', 'Emulators and Intel/AMD Android PCs (64-bit).'],
     [/x86\.apk$/i, 'Android x86', 'Emulators and older Intel/AMD Android devices (32-bit).'],
+    [/iOS\.ipa$/i, 'iPhone & iPad (unsigned)', 'For SideStore or AltStore. It won\'t install by itself.'],
     [/Windows\.msi$/i, 'Windows installer', 'Windows 10 and 11 PCs.'],
-    [/Tizen6.*\.wgt$/i, 'Samsung TV · 2021 and newer', 'Tizen 6.0 or newer. Install it with the Nuvio TV Installer.'],
-    [/Tizen5\.5.*Legacy.*\.wgt$|Legacy.*\.wgt$/i, 'Samsung TV · 2018–2020', 'Tizen 4.0–5.5. Install it with the Nuvio TV Installer.'],
-    [/webOS.*\.ipk$/i, 'LG TV (webOS)', 'Install it with the Nuvio TV Installer or webOS Dev Manager.'],
+    [/Tizen\.wgt$/i, 'Samsung TV · 2019 and newer', 'Tizen 5.0 or newer. Install it with the Nuvio TV Installer.'],
+    [/webOS.*\.ipk$/i, 'LG TV (webOS)', 'webOS 5 or newer. Install it with the Nuvio TV Installer or webOS Dev Manager.'],
+    [/\.patch$/i, 'Source patch', 'For developers: the changes that add Live TV to the original app.'],
     [/\.AppImage$/i, 'Linux (AppImage)', 'Make it executable, then run it.'],
     [/\.exe$/i, 'Windows', 'Windows 10 and 11.'],
     [/\.dmg$/i, 'macOS', ''],
@@ -60,7 +64,6 @@
     if (!iso) return '';
     try { return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }); } catch (e) { return iso.slice(0, 10); }
   }
-  function buildNo(tag) { var m = /build-(\d+)/i.exec(tag); return m ? +m[1] : null; }
 
   /* tiny, safe markdown for release notes */
   function md(src) {
@@ -111,31 +114,15 @@
 
   function releaseCard(p, rel, opts) {
     opts = opts || {};
-    var legacy = /legacy/i.test(rel.tag);
-    var heading = opts.heading || rel.name || rel.tag;
+        var heading = opts.heading || rel.name || rel.tag;
     return '<article class="release' + (opts.latest ? ' latest' : '') + '">' +
       '<div class="release-head"><div><h3>' + esc(heading) + '</h3><div class="sub">' + esc(rel.tag) + ' · ' + esc(date(rel.published)) + '</div></div>' +
-      '<div class="tags">' + (opts.latest ? '<span class="tag accent">Latest</span>' : '') + (legacy ? '<span class="tag">Legacy</span>' : '') +
-      (rel.prerelease ? '<span class="tag bad">Pre-release</span>' : '') + (p.alpha ? '<span class="tag">Alpha · testers</span>' : '') + '</div></div>' +
+      '<div class="tags">' + (opts.latest ? '<span class="tag accent">Latest</span>' : '') + (rel.prerelease ? '<span class="tag bad">Pre-release</span>' : '') + (p.alpha ? '<span class="tag">Alpha · testers</span>' : '') + '</div></div>' +
       (rel.assets.length ? '<ul class="assets">' + rel.assets.map(function (a) { return assetRow(p.repo, rel, a); }).join('') + '</ul>'
         : '<p class="small muted" style="padding:1rem 1.5rem;margin:0">This release has no files attached.</p>') +
       (rel.body && rel.body.trim() ? '<details class="notes"><summary>Release notes</summary><div class="md">' + md(rel.body) + '</div></details>' : '') +
       '</article>';
   }
-
-  function groupPaired(list) {
-    var groups = {}, order = [];
-    list.forEach(function (r) {
-      var key = r.tag.replace(/-legacy$/i, '');
-      if (!groups[key]) { groups[key] = []; order.push(key); }
-      groups[key].push(r);
-    });
-    order.sort(function (a, b) { return (buildNo(b) || 0) - (buildNo(a) || 0); });
-    return order.map(function (k) {
-      return groups[k].sort(function (a, b) { return /legacy/i.test(a.tag) - /legacy/i.test(b.tag); });
-    });
-  }
-  function pairTitle(r) { return /legacy/i.test(r.tag) ? 'Samsung 2018–2020 (legacy)' : 'Samsung 2021+ and LG webOS'; }
 
   function renderProduct(p, list) {
     var html = '<section class="product reveal in" id="' + p.id + '" data-section="' + esc(p.title) + '">' +
@@ -145,20 +132,7 @@
       return html;
     }
     list = list.slice().sort(function (a, b) { return new Date(b.published) - new Date(a.published); });
-    if (p.paired) {
-      var groups = groupPaired(list), first = groups[0], rest = groups.slice(1);
-      html += '<div class="build-group"><p class="label">Build ' + esc(buildNo(first[0].tag) || first[0].tag) + ' · both versions</p><div class="release-pair">' +
-        first.map(function (r) { return releaseCard(p, r, { latest: true, heading: pairTitle(r) }); }).join('') + '</div></div>';
-      if (rest.length) {
-        html += '<details class="older"><summary>Older builds (' + rest.length + ')</summary>' + rest.map(function (g) {
-          return '<div class="build-group"><p class="label">Build ' + esc(buildNo(g[0].tag) || g[0].tag) + '</p><div class="release-pair">' +
-            g.map(function (r) { return releaseCard(p, r, { heading: pairTitle(r) }); }).join('') + '</div></div>';
-        }).join('') + '</details>';
-      }
-    } else {
-      html += releaseCard(p, list[0], { latest: true });
-      if (list.length > 1) html += '<details class="older"><summary>Older builds (' + (list.length - 1) + ')</summary>' + list.slice(1).map(function (r) { return releaseCard(p, r); }).join('') + '</details>';
-    }
+    html += releaseCard(p, list[0], { latest: true });
     return html + '</section>';
   }
 
@@ -176,14 +150,14 @@
   }
 
   function normalize(repo, list) {
-    return list.filter(function (r) { return !r.draft; }).map(function (r) {
+    return list.filter(function (r) { return !r.draft; }).sort(function (a, b) { return new Date(b.published_at) - new Date(a.published_at); }).slice(0, 1).map(function (r) {
       return { tag: r.tag_name, name: r.name || r.tag_name, published: r.published_at, prerelease: r.prerelease, body: (r.body || '').slice(0, 4000),
         assets: r.assets.map(function (a) { return { name: a.name, size: a.size, updated: a.updated_at, digest: a.digest || null }; }) };
     });
   }
   function live() {
     return Promise.all(PRODUCTS.map(function (p) {
-      return fetch('https://api.github.com/repos/' + OWNER + '/' + p.repo + '/releases?per_page=100', { headers: { Accept: 'application/vnd.github+json' } })
+      return fetch('https://api.github.com/repos/' + OWNER + '/' + p.repo + '/releases?per_page=30', { headers: { Accept: 'application/vnd.github+json' } })
         .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
         .then(function (list) { return [p.repo, normalize(p.repo, list)]; });
     })).then(function (pairs) {

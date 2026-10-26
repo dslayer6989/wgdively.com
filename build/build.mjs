@@ -16,7 +16,7 @@ const pagesDir = join(here, 'pages');
 const offline = process.argv.includes('--offline');
 
 export const OWNER = 'dslayer6989';
-export const REPOS = ['NuvioDesktop', 'NuvioTVSmart', 'NuvioTV', 'NuvioTVSmart-Installer'];
+export const REPOS = ['NuvioDesktop', 'NuvioMobile', 'NuvioTV', 'NuvioTVSmart', 'NuvioTVSmart-Installer'];
 
 const NAV = [
   ['Downloads', '/downloads/', 'downloads'],
@@ -61,7 +61,8 @@ async function refreshReleases() {
     const res = await fetch(`https://api.github.com/repos/${OWNER}/${repo}/releases?per_page=100`, { headers });
     if (!res.ok) { console.warn(`releases: ${repo} -> HTTP ${res.status}; keeping the previous snapshot`); return; }
     const list = await res.json();
-    repos[repo] = list.filter(r => !r.draft).map(r => ({
+    // Only the newest published release of each repo is kept.
+    repos[repo] = list.filter(r => !r.draft).sort((a, b) => new Date(b.published_at) - new Date(a.published_at)).slice(0, 1).map(r => ({
       tag: r.tag_name, name: r.name || r.tag_name, published: r.published_at, prerelease: r.prerelease,
       body: (r.body || '').slice(0, 4000),
       assets: r.assets.map(a => ({ name: a.name, size: a.size, updated: a.updated_at, digest: a.digest || null })),

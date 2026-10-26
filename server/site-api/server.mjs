@@ -19,7 +19,7 @@
 //   TURNSTILE_SECRET  0x...    Turnstile secret key; when set, every message must pass the check
 //   ALLOWED_ORIGINS   https://wgdively.com,https://www.wgdively.com,https://preview.wgdively.com
 //   DOWNLOAD_OWNER    dslayer6989
-//   DOWNLOAD_REPOS    NuvioDesktop,NuvioTVSmart,NuvioTV,NuvioTVSmart-Installer
+//   DOWNLOAD_REPOS    NuvioDesktop,NuvioMobile,NuvioTV,NuvioTVSmart,NuvioTVSmart-Installer
 //   MAX_DOWNLOADS     24       downloads allowed at the same time
 //   PORT              8787
 // Downloads work even before the email settings are filled in.
@@ -32,7 +32,7 @@ const PORT = Number(env.PORT || 8787);
 const list = (v, d) => (v || d).split(',').map(s => s.trim()).filter(Boolean);
 const ORIGINS = list(env.ALLOWED_ORIGINS, 'https://wgdively.com,https://www.wgdively.com,https://preview.wgdively.com');
 const OWNER = env.DOWNLOAD_OWNER || 'dslayer6989';
-const REPOS = list(env.DOWNLOAD_REPOS, 'NuvioDesktop,NuvioTVSmart,NuvioTV,NuvioTVSmart-Installer');
+const REPOS = list(env.DOWNLOAD_REPOS, 'NuvioDesktop,NuvioMobile,NuvioTV,NuvioTVSmart,NuvioTVSmart-Installer');
 const MAX_DOWNLOADS = Number(env.MAX_DOWNLOADS || 24);
 const REASONS = ['Nuvio help', 'Bug report', 'IT or homelab help', 'Work enquiry', 'Website feedback', 'Something else'];
 const MAIL_READY = ['RESEND_API_KEY', 'MAIL_FROM', 'MAIL_TO'].every(k => env[k]);
